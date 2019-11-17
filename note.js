@@ -1,5 +1,5 @@
 const Note = {
-    Counter: 8,
+    idCounter: 8,
     dragged: null,
 
     process (noteElement) {
