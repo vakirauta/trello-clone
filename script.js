@@ -10,7 +10,7 @@ let columnIdCounter = 4;
         .querySelector('[data-action-addColumn]')
         .addEventListener ('click', function(event) {
             const columnElement = document.createElement('div')
-            console.log(`[data-action-addColumn]`)
+            console.log()
                 columnElement.classList.add('column')
                 columnElement.setAttribute('draggable', 'true')
                 columnElement.setAttribute('data-column-id', columnIdCounter)
