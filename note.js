@@ -14,7 +14,7 @@ const Note = {
             noteElement.removeAttribute('contenteditable')
             noteElement.setAttribute('draggable', 'true')
             noteElement.closest('.column').setAttribute('draggable', 'true')
-    
+            noteElement.textContent = noteElement.textContent.trim()
             if (!noteElement.textContent.trim().length) {
                 noteElement.remove()
             }
@@ -89,8 +89,9 @@ const Note = {
             this.parentElement.insertBefore(Note.dragged, this)
         }
         console.log(Note.dragged)
-    }
-
+    },
 }
+
+
 
 
