@@ -41,12 +41,12 @@ const Column = {
             }
         })
 
-            columnElement.addEventListener('dragstart', Note.dragstart)
-            columnElement.addEventListener('dragend', Note.dragend)
-            columnElement.addEventListener('dragenter', Note.dragenter)
-            columnElement.addEventListener('dragover', Note.dragover)
-            columnElement.addEventListener('dragleave', Note.dragleave)
-            columnElement.addEventListener('drop', Note.drop)
+            columnElement.addEventListener('dragstart', Column.dragstart)
+            columnElement.addEventListener('dragend', Column.dragend)
+            columnElement.addEventListener('dragenter', Column.dragenter)
+            columnElement.addEventListener('dragover', Column.dragover)
+            columnElement.addEventListener('dragleave', Column.dragleave)
+            columnElement.addEventListener('drop', Column.drop)
     },
     
     columnCreate (event) {
@@ -113,11 +113,9 @@ const Column = {
      drop (event) {
         event.stopPropagation()
     
-        if (this === Column.dragged) {
+        if (!Column.dragged || this === Column.dragged) {
             return
-        }
-    
-        if(this.parentElement === Note.dragged.parentElement) {
+        } 
             const col = Array.from(document.querySelectorAll('.column'))
             const indexA = col.indexOf(this)
             const indexB = col.indexOf(Column.dragged)
@@ -128,6 +126,9 @@ const Column = {
             else {
                 this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
             }
-        }
+         console.log(col)
     }
 }
+
+// const note = document.querySelectorAll('.note')
+// console.log(note);

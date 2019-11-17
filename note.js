@@ -88,6 +88,7 @@ const Note = {
         else {
             this.parentElement.insertBefore(Note.dragged, this)
         }
+        console.log(Note.dragged)
     }
 
 }
