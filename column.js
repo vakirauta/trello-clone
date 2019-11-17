@@ -1,5 +1,5 @@
 const Column = {
-    IdCounter: 4,
+    idCounter: 4,
 
     process (columnElement) {
         const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
@@ -45,7 +45,7 @@ const Column = {
         const columnElement = document.createElement('div')
             columnElement.classList.add('column')
             columnElement.setAttribute('draggable', 'true')
-            columnElement.setAttribute('data-column-id', Column.IdCounter)
+            columnElement.setAttribute('data-column-id', Column.idCounter)
 
             columnElement.innerHTML = 
             `<p class="column-header">В плане</p>
@@ -54,7 +54,7 @@ const Column = {
                 <span data-action-addNote class="action">+ Добавить карточку</span>
             </p>`
 
-            Column.IdCounter++
+            Column.idCounter++
 
             document.querySelector('.columns').append(columnElement)
 
