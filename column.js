@@ -126,21 +126,24 @@ const Column = {
     },
     
      drop (event) {
-        event.stopPropagation()
+        // event.stopPropagation()
     
-        if (!Column.dragged || this === Column.dragged) {
-            return
-        } 
-            const col = Array.from(document.querySelectorAll('.column'))
-            const indexA = col.indexOf(this)
-            const indexB = col.indexOf(Column.dragged)
+        // if (!Column.dragged || this === Column.dragged) {
+        //     return
+        // } 
+        //     const col = Array.from(document.querySelectorAll('.column'))
+        //     const indexA = col.indexOf(this)
+        //     const indexB = col.indexOf(Column.dragged)
     
-            if(indexA < indexB) {
-                this.parentElement.insertBefore(Column.dragged, this)
-            }
-            else {
-                this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
-            }
+        //     if(indexA < indexB) {
+        //         this.parentElement.insertBefore(Column.dragged, this)
+        //     }
+        //     else {
+        //         this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
+        //     }
+        if(Note.dragged) {
+            return this.querySelector('[data-notes]').append(Note.dragged)
+        }
     }
 }
 
