@@ -28,6 +28,19 @@ const Note = {
         noteElement.addEventListener('drop', Note.drop)
     },
 
+    createNote () {
+        const noteElement = document.createElement('div')
+                noteElement.classList.add('note')
+                noteElement.setAttribute('draggable', 'true')
+                noteElement.setAttribute('data-note-id', Note.idCounter)
+
+                Note.idCounter++
+                Note.process(noteElement);
+                
+                noteElement.setAttribute('contenteditable', 'true')
+                noteElement.focus()
+    }
+
      dragstart (event) {
         Note.dragged = this
         this.classList.add('dragged')
@@ -69,11 +82,11 @@ const Note = {
      drop (event) {
         event.stopPropagation()
     
-        if (!Note.dragged || this === Note.dragged) {
+        if (this === Note.dragged) {
             return
         }
     
-        if(this.parentElement === Note.dragged.parentElement) {
+        if (this.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this)
             const indexB = note.indexOf(Note.dragged)
@@ -88,7 +101,6 @@ const Note = {
         else {
             this.parentElement.insertBefore(Note.dragged, this)
         }
-        console.log(Note.dragged)
     }
 }
 
