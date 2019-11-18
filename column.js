@@ -73,6 +73,9 @@ const Column = {
              
 
     dragstart (event) {
+        if (this === Note.dragged) {
+            console.log('sdasdsad')
+        }
         Column.dragged = this
         this.classList.add('dragged')
     
@@ -80,18 +83,24 @@ const Column = {
     }, 
     
      dragend (event) {
+        if (this === Note.dragged) {
+            return
+        }
         Column.dragged = null
         this.classList.remove('dragged')
     
-        // document
-        //     .querySelectorAll('.note')
-        //     .forEach(x => x.classList.remove('under'))
+        document
+            .querySelectorAll('.note')
+            .forEach(x => x.classList.remove('under'))
     },
     
      dragenter (event) {
         if (this === Column.dragged) {
             return
         }
+        // if (this === Note.dragged) {
+        //     return
+        // }
            this.classList.add('under')
     },
     
@@ -101,12 +110,18 @@ const Column = {
         if (this === Column.dragged) {
             return
         }
+        // if (this === Note.dragged) {
+        //     return
+        // }
     },
     
      dragleave (event) {
         if (this === Column.dragged) {
             return
         }
+        // if (this === Note.dragged) {
+        //     return
+        // }
         this.classList.remove('under')
     },
     
@@ -126,7 +141,6 @@ const Column = {
             else {
                 this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
             }
-         console.log(col)
     }
 }
 

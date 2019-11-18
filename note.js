@@ -69,7 +69,7 @@ const Note = {
      drop (event) {
         event.stopPropagation()
     
-        if (this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
     
@@ -89,7 +89,7 @@ const Note = {
             this.parentElement.insertBefore(Note.dragged, this)
         }
         console.log(Note.dragged)
-    },
+    }
 }
 
 
