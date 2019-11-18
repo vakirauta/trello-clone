@@ -1,19 +1,14 @@
 const Column = {
     idCounter: 4,
+    dragged: null,
 
     process (columnElement) {
         const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
 
         spanAction_addNote.addEventListener('click', function (event) {
-                const noteElement = document.createElement('div')
-                noteElement.classList.add('note')
-                noteElement.setAttribute('draggable', 'true')
-                noteElement.setAttribute('data-note-id', Note.idCounter)
-
-                Note.idCounter++
+                const noteELement = Note.create()
 
                 columnElement.querySelector('[data-notes]').append(noteElement)
-                Note.process(noteElement);
                 
                 noteElement.setAttribute('contenteditable', 'true')
                 noteElement.focus()
@@ -31,20 +26,28 @@ const Column = {
             headerElement.removeAttribute('contenteditable', true)
         })
 
+        columnElement.addEventListener('dragstart', Column.dragstart)
+        columnElement.addEventListener('dragend', Column.dragend)
         columnElement.addEventListener('dragover', Column.dragover)
         columnElement.addEventListener('drop', Column.drop)
         },
 
-        dragover (event) {
-            event.preventDefault()
-        },
-
-        drop () {
-            if (!Note.dragged) {
-               return  this.querySelector('[data-notes]').append(Note.dragged)
-             }
-            },
         
+            dragstart (event) {
+                Column.dragged = this
+                this.classList.add('dragged')
+            
+                event.stopPropagation()
+            }, 
+            
+             dragend (event) {
+                Column.dragged = null
+                this.classList.remove('dragged')
+            
+                document
+                    .querySelectorAll('.note')
+                    .forEach(x => x.classList.remove('under'))
+            },
     
 
 
