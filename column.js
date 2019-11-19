@@ -6,10 +6,9 @@ const Column = {
         const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
 
         spanAction_addNote.addEventListener('click', function (event) {
-                const noteELement = Note.create()
+                const noteElement = Note.create()
 
                 columnElement.querySelector('[data-notes]').append(noteElement)
-                
                 noteElement.setAttribute('contenteditable', 'true')
                 noteElement.focus()
 
@@ -87,7 +86,7 @@ const Column = {
                     const indexA = note.indexOf(this)
                     const indexB = note.indexOf(Column.dragged)
             
-                    if(indexA > indexB) {
+                    if(indexA < indexB) {
                         this.parentElement.insertBefore(Column.dragged, this)
                     }
                     else {
