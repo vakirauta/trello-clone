@@ -28,25 +28,75 @@ const Column = {
 
         columnElement.addEventListener('dragstart', Column.dragstart)
         columnElement.addEventListener('dragend', Column.dragend)
+        columnElement.addEventListener('dragenter', Column.dragenter)
         columnElement.addEventListener('dragover', Column.dragover)
+        columnElement.addEventListener('dragleave', Column.dragleave)
         columnElement.addEventListener('drop', Column.drop)
         },
 
         
             dragstart (event) {
                 Column.dragged = this
-                this.classList.add('dragged')
+                Column.dragged.classList.add('dragged')
             
-                event.stopPropagation()
+                // event.stopPropagation()
             }, 
             
              dragend (event) {
+                Column.dragged.classList.remove('dragged')
                 Column.dragged = null
-                this.classList.remove('dragged')
+                
             
-                document
-                    .querySelectorAll('.note')
-                    .forEach(x => x.classList.remove('under'))
+                // document
+                //     .querySelectorAll('.note')
+                //     .forEach(x => x.classList.remove('under'))
+            },
+
+            dragenter (event) {
+                if (!Column.dragged || Column.dragged === this) {
+                    return
+                }
+            },
+            dragover (event) {
+                if (!Column.dragged || Column.dragged === this) {
+                    return
+                }
+            },
+            dragleave (event) {
+                if (!Column.dragged || Column.dragged === this) {
+                    return
+                }
+            },
+             dragover (event) {
+                event.preventDefault()
+            
+                if (!Column.dragged || this === Column.dragged) {
+                    return
+                }
+            },
+            
+            drop () {
+                event.stopPropagation()
+    
+                if (!Column.dragged || this === Column.dragged) {
+                    return
+                }
+            
+                if (this.parentElement === Column.dragged.parentElement) {
+                    const note = Array.from(this.parentElement.querySelectorAll('.note'))
+                    const indexA = note.indexOf(this)
+                    const indexB = note.indexOf(Column.dragged)
+            
+                    if(indexA > indexB) {
+                        this.parentElement.insertBefore(Column.dragged, this)
+                    }
+                    else {
+                        this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
+                    }
+                }
+                else {
+                    this.parentElement.insertBefore(Column.dragged, this)
+                }
             },
     
 

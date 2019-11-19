@@ -57,7 +57,7 @@ const Note = {
     },
     
      dragenter (event) {
-        if (this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
            this.classList.add('under')
@@ -66,13 +66,13 @@ const Note = {
      dragover (event) {
         event.preventDefault()
     
-        if (this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
     },
     
      dragleave (event) {
-        if (this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
         this.classList.remove('under')
@@ -81,7 +81,7 @@ const Note = {
      drop (event) {
         event.stopPropagation()
     
-        if (this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
     
