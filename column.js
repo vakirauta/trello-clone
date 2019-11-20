@@ -90,19 +90,19 @@ const Column = {
                 }
             
                 if (this.parentElement === Column.dragged.parentElement) {
-                    const col = Array.from(this.parentElement.querySelectorAll('.column'))
-                    const indexA = col.indexOf(this)
-                    const indexB = col.indexOf(Column.dragged)
+                    const children = Array.from(document.querySelector('.columns').children)
+                    const indexA = children.indexOf(this)
+                    const indexB = children.indexOf(Column.dragged)
             
                     if(indexA < indexB) {
-                        this.parentElement.insertBefore(Column.dragged, this)
+                        document.querySelector('.columns').insertBefore(Column.dragged, this)
                     }
                     else {
-                        this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
+                        document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     }
-                }
+                // }
                 // else {
-                //     this.parentElement.insertBefore(Column.dragged, this)
+                //     document.querySelector('.columns').insertBefore(Column.dragged, this)
                 // }
             },
     

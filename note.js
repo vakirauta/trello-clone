@@ -97,6 +97,8 @@ const Note = {
             if (indexA < indexB) {
                 this.parentElement.insertBefore(Note.dragged, this)
                 console.log(event.target)
+            } else if (this.parentElement === Note.dragged.parentElement) {
+                this.parentElement.insertBefore(Note.dragged, this)
             }
 
             else {
