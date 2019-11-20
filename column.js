@@ -59,8 +59,8 @@ const Column = {
                 //     .forEach(x => x.classList.remove('under'))
             },
 
-            dragenter (event) {
-                if (this || !Column.dragged  === Column.dragged) {
+            dragenter (event) 
+                if (!Column.dragged || Column.dragged === this) {
                     return
                 }
                 this.classList.add('under')
@@ -68,7 +68,7 @@ const Column = {
             },
 
             dragleave (event) {
-                if (this || !Column.dragged === Column.dragged)  {
+                if (!Column.dragged || Column.dragged === this) {
                     return
                 }
                 this.classList.remove('under')
@@ -78,7 +78,7 @@ const Column = {
              dragover (event) {
                 event.preventDefault()
             
-                if (this || !Column.dragged === Column.dragged) {
+                if (!Column.dragged || Column.dragged === this) {
                     return
                 }
                 this.classList.remove('under')
@@ -86,7 +86,7 @@ const Column = {
             
             drop () {
     
-                if (this || !Column.dragged === Column.dragged) {
+                if (!Column.dragged || Column.dragged === this) {
                     return
                 }
             
