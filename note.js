@@ -48,18 +48,20 @@ const Note = {
     }, 
     
      dragend (event) {
+        event.stopPropagation()
+
         Note.dragged = null
         this.classList.remove('dragged')
     
         document
             .querySelectorAll('.note')
             .forEach(x => x.classList.remove('under'))
-            
-            event.stopPropagation()
     },
     
      dragenter (event) {
-        if (!Note.dragged || this === Note.dragged) {
+        event.stopPropagation()
+
+        if (this === Note.dragged || !Note.dragged) {
             return
         }
            this.classList.add('under')
@@ -74,7 +76,9 @@ const Note = {
     },
     
      dragleave (event) {
-        if (!Note.dragged || this === Note.dragged) {
+        event.stopPropagation()
+
+        if (this === Note.dragged || !Note.dragged) {
             return
         }
         this.classList.remove('under')

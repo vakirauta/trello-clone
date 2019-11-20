@@ -39,11 +39,19 @@ const Column = {
                 Column.dragged.classList.add('dragged')
             
                 event.stopPropagation()
+
+                document
+                    .querySelectorAll('.note')
+                    .forEach(noteElement => noteElement.removeAttribute('draggable'))
             }, 
             
              dragend (event) {
                 Column.dragged.classList.remove('dragged')
                 Column.dragged = null
+
+                document
+                    .querySelectorAll('.note')
+                    .forEach(noteElement => noteElement.setAttribute('draggable', true))
                 
             
                 // document
@@ -52,23 +60,25 @@ const Column = {
             },
 
             dragenter (event) {
-                if (!Column.dragged || Column.dragged === this) {
+                if (this || !Column.dragged  === Column.dragged) {
                     return
                 }
                 this.classList.add('under')
+                console.log('enter')
             },
 
             dragleave (event) {
-                if (!Column.dragged || Column.dragged === this) {
+                if (this || !Column.dragged === Column.dragged)  {
                     return
                 }
                 this.classList.remove('under')
+                console.log('leave')
             },
 
              dragover (event) {
                 event.preventDefault()
             
-                if (!Column.dragged || this === Column.dragged) {
+                if (this || !Column.dragged === Column.dragged) {
                     return
                 }
                 this.classList.remove('under')
@@ -76,7 +86,7 @@ const Column = {
             
             drop () {
     
-                if (!Column.dragged || this === Column.dragged) {
+                if (this || !Column.dragged === Column.dragged) {
                     return
                 }
             
