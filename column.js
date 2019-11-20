@@ -38,7 +38,7 @@ const Column = {
                 Column.dragged = this
                 Column.dragged.classList.add('dragged')
             
-                // event.stopPropagation()
+                event.stopPropagation()
             }, 
             
              dragend (event) {
@@ -55,27 +55,26 @@ const Column = {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
+                this.classList.add('under')
             },
-            dragover (event) {
-                if (!Column.dragged || Column.dragged === this) {
-                    return
-                }
-            },
+
             dragleave (event) {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
+                this.classList.remove('under')
             },
+
              dragover (event) {
                 event.preventDefault()
             
                 if (!Column.dragged || this === Column.dragged) {
                     return
                 }
+                this.classList.remove('under')
             },
             
             drop () {
-                event.stopPropagation()
     
                 if (!Column.dragged || this === Column.dragged) {
                     return

@@ -54,6 +54,8 @@ const Note = {
         document
             .querySelectorAll('.note')
             .forEach(x => x.classList.remove('under'))
+            
+            event.stopPropagation()
     },
     
      dragenter (event) {
