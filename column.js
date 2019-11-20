@@ -59,12 +59,11 @@ const Column = {
                 //     .forEach(x => x.classList.remove('under'))
             },
 
-            dragenter (event) 
+            dragenter (event) {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
                 this.classList.add('under')
-                console.log('enter')
             },
 
             dragleave (event) {
@@ -72,7 +71,6 @@ const Column = {
                     return
                 }
                 this.classList.remove('under')
-                console.log('leave')
             },
 
              dragover (event) {
@@ -84,16 +82,17 @@ const Column = {
                 this.classList.remove('under')
             },
             
-            drop () {
-    
+            drop (event) {
+                event.stopPropagation()
+
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
             
                 if (this.parentElement === Column.dragged.parentElement) {
-                    const note = Array.from(this.parentElement.querySelectorAll('.note'))
-                    const indexA = note.indexOf(this)
-                    const indexB = note.indexOf(Column.dragged)
+                    const col = Array.from(this.parentElement.querySelectorAll('.column'))
+                    const indexA = col.indexOf(this)
+                    const indexB = col.indexOf(Column.dragged)
             
                     if(indexA < indexB) {
                         this.parentElement.insertBefore(Column.dragged, this)
@@ -102,9 +101,9 @@ const Column = {
                         this.parentElement.insertBefore(Column.dragged, this.nextElementSibling)
                     }
                 }
-                else {
-                    this.parentElement.insertBefore(Column.dragged, this)
-                }
+                // else {
+                //     this.parentElement.insertBefore(Column.dragged, this)
+                // }
             },
     
 
