@@ -4,14 +4,16 @@ const Column = {
 
 	process (columnElement) {
 		const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
-
+        // КНОПКА ДОБАВИТЬ КАРТОЧКУ
 		spanAction_addNote.addEventListener('click', function (event) {
+
+            // СОЗДАТЬ КАРТОЧКУ
             const noteElement = Note.create()
 			
 			columnElement.querySelector('[data-notes]').append(noteElement)
 
 			noteElement.setAttribute('contenteditable', 'true')
-			noteElement.focus()
+            noteElement.focus()
 		})
         // ЗАГОЛОВОК
         const headerElement = columnElement.querySelector('.column-header')
@@ -19,6 +21,7 @@ const Column = {
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
+            console.log('????')
         })
 
         headerElement.addEventListener('blur', function (event) {
@@ -55,9 +58,9 @@ const Column = {
                 Column.dragged = null
                 this.classList.remove('dragged')
 
-                // document
-                //     .querySelectorAll('.note')
-                //     .forEach(noteElement => noteElement.setAttribute('draggable', true))
+                document
+                    .querySelectorAll('.note')
+                    .forEach(noteElement => noteElement.setAttribute('draggable', true))
                 
             
                 // document
@@ -94,6 +97,11 @@ const Column = {
                 if (!Column.dragged || this === Column.dragged) {
                     return
                 }
+
+                // if (Note.dragged) {
+                //     return columnElement.querySelector('[data-notes]').append(Note.dragged),
+                //     console.log(Note.dragged)
+                // }
             
                 if (this.parentElement === Column.dragged.parentElement) {
                     const children = Array.from(document.querySelector('.columns').children)
@@ -103,10 +111,6 @@ const Column = {
                     if(indexA < indexB) {
                         document.querySelector('.columns').insertBefore(Column.dragged, this)
                     }
-                    // else if (Note.dragged) {
-                    //     return columnElement.querySelector('[data-notes]').append(Note.dragged)
-                    // }
-
                     else {
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     }
@@ -114,7 +118,7 @@ const Column = {
                 else {
                     this.parentElement.insertBefore(Column.dragged, this)
                 }
-                console.log(Note.dragged)
+                console.log(spanAction_addNote)
             }
     }
 

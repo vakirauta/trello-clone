@@ -27,7 +27,7 @@ const Note = {
         noteElement.addEventListener('dragleave', Note.dragleave)
         noteElement.addEventListener('drop', Note.drop)
     },
-
+// СОЗДАТЬ КАРТОЧКУ
     create () {
         const noteElement = document.createElement('div')
 			noteElement.classList.add('note')
