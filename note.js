@@ -3,14 +3,14 @@ const Note = {
     dragged: null,
 
     process (noteElement) {
-        noteElement.addEventListener('dblclick', function (event) {
+            noteElement.addEventListener('dblclick', function (event) {
             noteElement.setAttribute('contenteditable', 'true')
             noteElement.removeAttribute('draggable')
             noteElement.closest('.column').removeAttribute('draggable')
             noteElement.focus()
         })
     
-        noteElement.addEventListener('blur', function (event) {
+            noteElement.addEventListener('blur', function (event) {
             noteElement.removeAttribute('contenteditable')
             noteElement.setAttribute('draggable', 'true')
             noteElement.closest('.column').setAttribute('draggable', 'true')
@@ -48,14 +48,14 @@ const Note = {
     }, 
     
      dragend (event) {
-        event.stopPropagation()
-
         Note.dragged = null
         this.classList.remove('dragged')
     
         document
             .querySelectorAll('.note')
             .forEach(x => x.classList.remove('under'))
+
+            event.stopPropagation()
     },
     
      dragenter (event) {
@@ -82,10 +82,9 @@ const Note = {
         this.classList.remove('under')
     },
     
-     drop () {
+     drop (event) {
         event.stopPropagation()
-    
-        if (!Note.dragged || this === Note.dragged) {
+        if (Column.dragged || this === Note.dragged) {
             return
         }
     
@@ -105,10 +104,12 @@ const Note = {
             else {
                 this.parentElement.insertBefore(Note.dragged, this.nextElementSibling)
             }
+
         }
         else {
             this.parentElement.insertBefore(Note.dragged, this)
         }
+        
     }
 }
 

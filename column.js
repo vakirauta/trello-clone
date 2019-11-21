@@ -71,7 +71,7 @@ const Column = {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
-                this.classList.remove('under')
+                // this.classList.remove('under')
             },
 
              dragover (event) {
@@ -102,9 +102,9 @@ const Column = {
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     }
                 }
-                // else {
-                //     this.parentElement.insertBefore(Column.dragged, this)
-                // }
+                else {
+                    this.parentElement.insertBefore(Column.dragged, this)
+                }
             },
     
 
