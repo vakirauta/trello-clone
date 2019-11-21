@@ -7,18 +7,18 @@ const Column = {
 
         spanAction_addNote.addEventListener('click', function (event) {
                 const noteElement = Note.create()
-
                 columnElement.querySelector('[data-notes]').append(noteElement)
                 noteElement.setAttribute('contenteditable', 'true')
                 noteElement.focus()
-
+                console.log('!!!!')
         })
-
+        // ЗАГОЛОВОК
         const headerElement = columnElement.querySelector('.column-header')
 
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
+            console.log('????')
         })
 
         headerElement.addEventListener('blur', function (event) {
@@ -46,12 +46,12 @@ const Column = {
             }, 
             
              dragend (event) {
-                Column.dragged.classList.remove('dragged')
                 Column.dragged = null
+                this.classList.remove('dragged')
 
-                document
-                    .querySelectorAll('.note')
-                    .forEach(noteElement => noteElement.setAttribute('draggable', true))
+                // document
+                //     .querySelectorAll('.note')
+                //     .forEach(noteElement => noteElement.setAttribute('draggable', true))
                 
             
                 // document
@@ -60,15 +60,14 @@ const Column = {
             },
 
             dragenter (event) {
-                if (!Column.dragged || Column.dragged === this) {
+                if (this === Column.dragged) {
                     return
                 }
                 this.classList.add('under')
-                console.log(this)
             },
 
             dragleave (event) {
-                if (!Column.dragged || Column.dragged === this) {
+                if (this === Column.dragged) {
                     return
                 }
                 this.classList.remove('under')
@@ -76,8 +75,8 @@ const Column = {
 
              dragover (event) {
                 event.preventDefault()
-            
-                if (!Column.dragged || Column.dragged === this) {
+    
+                if (this === Column.dragged) {
                     return
                 }
                 // this.classList.remove('under')
@@ -86,7 +85,7 @@ const Column = {
             drop (event) {
                 event.stopPropagation()
 
-                if (!Column.dragged || Column.dragged === this) {
+                if (!Column.dragged || this === Column.dragged) {
                     return
                 }
             
