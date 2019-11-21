@@ -71,7 +71,7 @@ const Column = {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
-                // this.classList.remove('under')
+                this.classList.remove('under')
             },
 
              dragover (event) {
@@ -80,7 +80,7 @@ const Column = {
                 if (!Column.dragged || Column.dragged === this) {
                     return
                 }
-                this.classList.remove('under')
+                // this.classList.remove('under')
             },
             
             drop (event) {
@@ -105,31 +105,8 @@ const Column = {
                 else {
                     this.parentElement.insertBefore(Column.dragged, this)
                 }
-            },
-    
-
-
-    columnCreate (event) {
-    const columnElement = document.createElement('div')
-    
-        columnElement.classList.add('column')
-        columnElement.setAttribute('draggable', 'true')
-        columnElement.setAttribute('data-column-id', Column.idCounter)
-
-        columnElement.innerHTML = 
-        `<p class="column-header">В плане</p>
-        <div data-notes></div>
-        <p class="column-footer">
-            <span data-action-addNote class="action">+ Добавить карточку</span>
-        </p>`
-
-        Column.idCounter++
-
-        document.querySelector('.columns').append(columnElement)
-
-        Column.process (columnElement)
- }
-}
+            }
+    }
 
 // const note = document.querySelectorAll('.note')
 // console.log(note);

@@ -1,7 +1,10 @@
 const Note = {
+    // счетчик для Id заметок
     idCounter: 8,
+    // элемент который перетаскиваем
     dragged: null,
 
+    // функция принимает в качестве аргумента заметку и вешает на нее событие, позволяющее редактировать эту заметку
     process (noteElement) {
             noteElement.addEventListener('dblclick', function (event) {
             noteElement.setAttribute('contenteditable', 'true')
@@ -9,7 +12,8 @@ const Note = {
             noteElement.closest('.column').removeAttribute('draggable')
             noteElement.focus()
         })
-    
+            // после того как фокус покидает элемент - удаляем атрибут
+            // а если в заметке нет текста - удалем заметку
             noteElement.addEventListener('blur', function (event) {
             noteElement.removeAttribute('contenteditable')
             noteElement.setAttribute('draggable', 'true')
@@ -35,8 +39,8 @@ const Note = {
                 noteElement.setAttribute('data-note-id', Note.idCounter)
 
                 Note.idCounter++
-                Note.process(noteElement)
-
+                this.process(noteElement)
+                console.log('create')
                 return noteElement
     },
 
@@ -67,7 +71,7 @@ const Note = {
     },
     
      dragover (event) {
-        event.preventDefault()
+        // event.preventDefault()
     
         if (!Note.dragged || this === Note.dragged) {
             return
@@ -84,7 +88,7 @@ const Note = {
     
      drop (event) {
         event.stopPropagation()
-        if (Column.dragged || this === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
     
@@ -108,7 +112,9 @@ const Note = {
         }
         else {
             this.parentElement.insertBefore(Note.dragged, this)
+            console.log('drop')
         }
+        
         
     }
 }
