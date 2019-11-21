@@ -69,14 +69,17 @@ const Column = {
             },
 
             dragenter (event) {
-                if (this === Column.dragged) {
+                if (!Column.dragged || this === Column.dragged) {
                     return
                 }
                 this.classList.add('under')
+                // document
+                //     .querySelectorAll('.note')
+                //     .forEach(x => x.classList.remove('under'))
             },
 
             dragleave (event) {
-                if (this === Column.dragged) {
+                if (!Column.dragged || this === Column.dragged) {
                     return
                 }
                 this.classList.remove('under')
@@ -85,10 +88,10 @@ const Column = {
              dragover (event) {
                 event.preventDefault()
     
-                if (this === Column.dragged) {
+                if (!Column.dragged || this === Column.dragged) {
                     return
                 }
-                // this.classList.remove('under')
+                // this.classList.add('under')
             },
             
             drop (event) {
@@ -118,7 +121,6 @@ const Column = {
                 else {
                     this.parentElement.insertBefore(Column.dragged, this)
                 }
-                console.log(spanAction_addNote)
             }
     }
 
