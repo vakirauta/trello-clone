@@ -1,29 +1,35 @@
 const Column = {
-    idCounter: 4,
-    dragged: null,
+	idCounter: 4,
+	dragged: null,
 
-    process (columnElement) {
-        const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
+	process (columnElement) {
+		const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
 
-        spanAction_addNote.addEventListener('click', function (event) {
-                const noteElement = Note.create()
-                columnElement.querySelector('[data-notes]').append(noteElement)
-                noteElement.setAttribute('contenteditable', 'true')
-                noteElement.focus()
-                console.log('!!!!')
-        })
+		spanAction_addNote.addEventListener('click', function (event) {
+            const noteElement = Note.create()
+			
+			columnElement.querySelector('[data-notes]').append(noteElement)
+
+			noteElement.setAttribute('contenteditable', 'true')
+			noteElement.focus()
+		})
         // ЗАГОЛОВОК
         const headerElement = columnElement.querySelector('.column-header')
 
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
-            console.log('????')
         })
 
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
         })
+
+        columnElement.addEventListener('drop', function(event){
+			if (Note.dragged) {
+				return columnElement.querySelector('[data-notes]').append(Note.dragged)
+			}
+		})
 
         columnElement.addEventListener('dragstart', Column.dragstart)
         columnElement.addEventListener('dragend', Column.dragend)
@@ -97,6 +103,10 @@ const Column = {
                     if(indexA < indexB) {
                         document.querySelector('.columns').insertBefore(Column.dragged, this)
                     }
+                    // else if (Note.dragged) {
+                    //     return columnElement.querySelector('[data-notes]').append(Note.dragged)
+                    // }
+
                     else {
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     }
@@ -104,6 +114,7 @@ const Column = {
                 else {
                     this.parentElement.insertBefore(Column.dragged, this)
                 }
+                console.log(Note.dragged)
             }
     }
 
