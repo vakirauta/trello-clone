@@ -82,7 +82,7 @@ const Note = {
         this.classList.remove('under')
     },
     
-     drop (event) {
+     drop () {
         event.stopPropagation()
     
         if (!Note.dragged || this === Note.dragged) {
@@ -90,16 +90,17 @@ const Note = {
         }
     
         if (this.parentElement === Note.dragged.parentElement) {
+            
             const note = Array.from(this.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this)
             const indexB = note.indexOf(Note.dragged)
     
             if (indexA < indexB) {
                 this.parentElement.insertBefore(Note.dragged, this)
-                console.log(event.target)
-            } else if (this.parentElement === Note.dragged.parentElement) {
-                this.parentElement.insertBefore(Note.dragged, this)
-            }
+            } 
+            // else if (this.parentElement === Note.dragged.parentElement) {
+            //     this.parentElement.insertBefore(Note.dragged, this)
+            // }
 
             else {
                 this.parentElement.insertBefore(Note.dragged, this.nextElementSibling)

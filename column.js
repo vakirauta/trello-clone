@@ -64,6 +64,7 @@ const Column = {
                     return
                 }
                 this.classList.add('under')
+                console.log(this)
             },
 
             dragleave (event) {
@@ -100,9 +101,9 @@ const Column = {
                     else {
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     }
-                // }
+                }
                 // else {
-                //     document.querySelector('.columns').insertBefore(Column.dragged, this)
+                //     this.parentElement.insertBefore(Column.dragged, this)
                 // }
             },
     
