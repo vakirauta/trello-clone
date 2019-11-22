@@ -48,6 +48,7 @@ const Note = {
     },
     
     dragend (event) {
+        event.preventDefault()
         Note.dragged = null
         this.classList.remove('dragged')
     
@@ -57,6 +58,7 @@ const Note = {
     },
     
     dragenter (event) {
+        event.preventDefault()
         if (this === Note.dragged) {
             return
         }
@@ -81,7 +83,6 @@ const Note = {
     
     drop (event) {
         event.stopPropagation()
-    
         if (!Note.dragged || this === Note.dragged) {
             return
         }
@@ -93,6 +94,7 @@ const Note = {
     
             if (indexA < indexB) {
                 this.parentElement.insertBefore(Note.dragged, this)
+
             }
             
             else {

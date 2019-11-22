@@ -122,9 +122,9 @@ body {
 	cursor: pointer;
 }
 
-/*.column.under {
+.column.under {
 	margin-top: 20px;
-}*/
+}
 
 .note.under {
 	opacity: 0.5;

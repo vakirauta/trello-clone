@@ -1,6 +1,7 @@
 const Column = {
 	idCounter: 4,
-	dragged: null,
+    dragged: null,
+    dropped: null,
 
 	process (columnElement) {
 		const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
@@ -36,9 +37,9 @@ const Column = {
 
         columnElement.addEventListener('dragstart', Column.dragstart)
         columnElement.addEventListener('dragend', Column.dragend)
-        columnElement.addEventListener('dragenter', Column.dragenter)
+        // columnElement.addEventListener('dragenter', Column.dragenter)
         columnElement.addEventListener('dragover', Column.dragover)
-        columnElement.addEventListener('dragleave', Column.dragleave)
+        // columnElement.addEventListener('dragleave', Column.dragleave)
         columnElement.addEventListener('drop', Column.drop)
         },
 
@@ -56,47 +57,61 @@ const Column = {
             
              dragend (event) {
                 Column.dragged = null
+                Column.dropped = null
                 this.classList.remove('dragged')
 
                 document
                     .querySelectorAll('.note')
                     .forEach(noteElement => noteElement.setAttribute('draggable', true))
                 
-            
+                
                 // document
                 //     .querySelectorAll('.note')
                 //     .forEach(x => x.classList.remove('under'))
             },
 
-            dragenter (event) {
-                if (!Column.dragged || this === Column.dragged) {
-                    return
-                }
-                this.classList.add('under')
-                // document
-                //     .querySelectorAll('.note')
-                //     .forEach(x => x.classList.remove('under'))
-            },
+            // dragenter (event) {
+            //     if (!Column.dragged || this === Column.dragged) {
+            //         return
+            //     }
+            //     this.classList.add('under')
+            //     // document
+            //     //     .querySelectorAll('.note')
+            //     //     .forEach(x => x.classList.remove('under'))
+            // },
 
-            dragleave (event) {
-                if (!Column.dragged || this === Column.dragged) {
-                    return
-                }
-                this.classList.remove('under')
-            },
+            // dragleave (event) {
+            //     if (!Column.dragged || this === Column.dragged) {
+            //         return
+            //     }
+            //     this.classList.remove('under')
+            // },
 
              dragover (event) {
-                event.preventDefault()
-    
-                if (!Column.dragged || this === Column.dragged) {
-                    return
-                }
-                // this.classList.add('under')
+                 event.preventDefault()
+                 event.stopPropagation()
+
+                 if (Column.dragged === this) {
+                     if (Column.dropped) {
+                        Column.dropped.classList.remove('under')
+                     }
+                     Column.dropped = null
+                 }
+                 
+                 if (!Column.dragged || this === Column.dragged) {
+                     return
+                    }
+                Column.dropped = this
+
+                document
+                    .querySelectorAll('.column')
+                    .forEach(columnElement => columnElement.classList.remove('under'))
+
+                this.classList.add('under')
             },
             
             drop (event) {
                 event.stopPropagation()
-
                 if (!Column.dragged || this === Column.dragged) {
                     return
                 }
@@ -113,15 +128,21 @@ const Column = {
                     const indexB = children.indexOf(Column.dragged)
             
                     if(indexA < indexB) {
+                        // Вставляем переносимый элемент перед которым делаем дроп
+                        // this - элемент над которым дропаем(срабатывает, в данном случае колонка)
                         document.querySelector('.columns').insertBefore(Column.dragged, this)
                     }
                     else {
+                        // Вставляем переносимый элемент перед которым делаем дроп
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
                     } 
                 }
                 else {
-                    this.parentElement.insertBefore(Column.dragged, this)    
+                    this.parentElement.insertBefore(Column.dragged, this) 
                 }  
+                document
+                    .querySelectorAll('.column')
+                    .forEach(columnElement => columnElement.classList.remove('under'))
             }
     }
 
