@@ -11,25 +11,9 @@ document
         .querySelector('[data-action-addColumn]')
         // вешаем событие
         .addEventListener ('click', function (event) {
-            // создаем колонку
-                const columnElement = document.createElement('div')
-                
-                    columnElement.classList.add('column')
-                    columnElement.setAttribute('draggable', 'true')
-                    columnElement.setAttribute('data-column-id', Column.idCounter)
-            
-                    columnElement.innerHTML = 
-                    `<p class="column-header">В плане</p>
-                    <div data-notes></div>
-                    <p class="column-footer">
-                        <span data-action-addNote class="action">+ Добавить карточку</span>
-                    </p>`
-            
-                    Column.idCounter++
+                    const columnElement = Column.create()
                     // вставляем новую колонку
                     document.querySelector('.columns').append(columnElement)
-                    // обрабатываем новую колонку, чтобы в ней можно было боавлять новые заметки
-                    Column.process (columnElement)
                     columnElement.querySelector('.column-header').setAttribute('contenteditable', true)
 		            columnElement.querySelector('.column-header').focus()
              }

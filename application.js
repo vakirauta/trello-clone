@@ -2,11 +2,11 @@ const Application = {
     save () {
         const object = {
             columns: {
-                idCounter: 1,
+                idCounter: Column.idCounter,
                 items: []
             },
             notes: {
-                idCounter: 1,
+                idCounter: Note.idCounter,
                 items: []
             }
         }
@@ -22,18 +22,38 @@ const Application = {
                     .querySelectorAll('.note')
                     .forEach(noteElement => {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
-                        object.notes.items.push(this)
+                        // object.notes.items.push(this)
                     })
 
                 object.columns.items.push(column)
                 
             })
 
-            return object
+            document
+                .querySelectorAll('.note')
+                .forEach(noteElement => {
+                    const note = {
+                        id: parseInt(noteElement.getAttribute('data-note-id')),
+                        content: noteElement.textContent
+                    }
+                    object.notes.items.push(note)
+            })
+
+            const json = JSON.stringify(object)
+
+            console.log(json)
+
+            localStorage.setItem('trello', json)
 
     },
 
     load () {
+        if (!localStorage.getItem('trello')) {
+            return
+        }
+
+        const object = JSON.parse(localStorage.getItem('trello'))
+        console.log(object)
 
     }
 }
