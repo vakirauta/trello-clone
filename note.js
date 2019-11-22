@@ -103,6 +103,8 @@ const Note = {
         else {
             this.parentElement.insertBefore(Note.dragged, this)
         }
+        this.classList.remove('under')
+        
     }
 }
 

@@ -121,6 +121,9 @@ const Column = {
                 else {
                     this.parentElement.insertBefore(Column.dragged, this)
                 }
+                document
+                    .querySelectorAll('.note')
+                    .forEach(x => x.classList.remove('under'))
             }
     }
 
