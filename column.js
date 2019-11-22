@@ -101,6 +101,7 @@ const Column = {
                     return
                 }
 
+
                 // if (Note.dragged) {
                 //     return columnElement.querySelector('[data-notes]').append(Note.dragged),
                 //     console.log(Note.dragged)
@@ -116,14 +117,11 @@ const Column = {
                     }
                     else {
                         document.querySelector('.columns').insertBefore(Column.dragged, this.nextElementSibling)
-                    }
+                    } 
                 }
                 else {
-                    this.parentElement.insertBefore(Column.dragged, this)
-                }
-                document
-                    .querySelectorAll('.note')
-                    .forEach(x => x.classList.remove('under'))
+                    this.parentElement.insertBefore(Column.dragged, this)    
+                }  
             }
     }
 
