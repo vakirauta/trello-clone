@@ -80,7 +80,7 @@ const Note = {
     },
     
     drop (event) {
-        event.preventDefault()
+        // event.stopPropagation()
     
         if (!Note.dragged || this === Note.dragged) {
             return
