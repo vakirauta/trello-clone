@@ -23,10 +23,12 @@ const Column = {
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
+            Application.save()
         })
 
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
+            Application.save()
         })
 
         columnElement.addEventListener('drop', function(event){

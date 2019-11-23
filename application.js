@@ -15,7 +15,7 @@ const Application = {
             .querySelectorAll('.column')
             .forEach(columnElement => {
                 const column = {
-                    title: '',
+                    title: [],
                     id: parseInt(columnElement.getAttribute('data-column-id')),
                     noteIds: []
                 }
@@ -26,9 +26,19 @@ const Application = {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
                         // object.notes.items.push(this)
                     })
+                columnElement
+                    .querySelectorAll('.column-header')
+                    .forEach(titleElement => {
+                        const header = {
+                            content: titleElement.textContent
+                        }
+                        column.title.push(header.content)
+                    })
                 // Пушим Id колонок в объект Object.columns.item
                 object.columns.items.push(column)
                 
+                console.log(column)
+            
             })
                 // Находим,а затем обходим все заметки
             document
@@ -40,18 +50,9 @@ const Application = {
                     }
                     object.notes.items.push(note)
             })
-
-            document
-                .querySelectorAll('.column-header')
-                .forEach(titleElement => {
-                    const title= {
-                        content: titleElement.textContent
-                    }
-                    console.log(titleElement.textContent)
-                })
+                
 
             const json = JSON.stringify(object)
-            console.log(titleElement.textContent)
 
             localStorage.setItem('trello', json)
 
