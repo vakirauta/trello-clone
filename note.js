@@ -28,10 +28,12 @@ const Note = {
         noteElement.addEventListener('drop', Note.drop)
     },
 // СОЗДАТЬ КАРТОЧКУ
-    create (id = null) {
+    create (id = null, content = '') {
         const noteElement = document.createElement('div')
 			noteElement.classList.add('note')
             noteElement.setAttribute('draggable', 'true')
+
+            noteElement.textContent = content
             
         if (id) {
             noteElement.setAttribute('data-note-id', id)

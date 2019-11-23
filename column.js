@@ -66,6 +66,8 @@ const Column = {
             </p>`
             // обрабатываем новую колонку, чтобы в ней можно было боавлять новые заметки
             Column.process (columnElement)
+
+            return columnElement
         },
 
         
