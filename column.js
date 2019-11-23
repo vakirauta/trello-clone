@@ -15,6 +15,7 @@ const Column = {
 
 			noteElement.setAttribute('contenteditable', 'true')
             noteElement.focus()
+            
 		})
         // ЗАГОЛОВОК
         const headerElement = columnElement.querySelector('.column-header')
@@ -22,7 +23,6 @@ const Column = {
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
-            console.log('????')
         })
 
         headerElement.addEventListener('blur', function (event) {
@@ -91,7 +91,7 @@ const Column = {
                     .querySelectorAll('.note')
                     .forEach(noteElement => noteElement.setAttribute('draggable', true))
                 
-                
+                    Application.save()
                 // document
                 //     .querySelectorAll('.note')
                 //     .forEach(x => x.classList.remove('under'))

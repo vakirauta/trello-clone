@@ -1,12 +1,15 @@
 //Реализуем добавление заметок в колонки
 //находим все колонки
-document
-.querySelectorAll('.column')
+// document
+// .querySelectorAll('.column')
 //добавляем функцию, которая позволяет добавлять заметки в колонку
-.forEach(Column.process)
+// .forEach(Column.process)
 
 // Создание новой колонки
 // находим кнопку для добавления колонки
+
+Application.load()
+
     document
         .querySelector('[data-action-addColumn]')
         // вешаем событие
@@ -15,7 +18,9 @@ document
                     // вставляем новую колонку
                     document.querySelector('.columns').append(columnElement)
                     columnElement.querySelector('.column-header').setAttribute('contenteditable', true)
-		            columnElement.querySelector('.column-header').focus()
+                    columnElement.querySelector('.column-header').focus()
+                    
+                    Application.save()
              }
         )
 // редактирование заметок при двойном клике

@@ -18,6 +18,8 @@ const Note = {
             if (!noteElement.textContent.trim().length) {
                 noteElement.remove()
             }
+
+            Application.save()
         })
     
         noteElement.addEventListener('dragstart', Note.dragstart)
