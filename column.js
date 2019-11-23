@@ -47,9 +47,11 @@ const Column = {
         columnElement.addEventListener('drop', Column.drop)
         },
 
-        create (id = null ) {
+        create (id = null) {
+
             const columnElement = document.createElement('div')
                 
+            
             columnElement.classList.add('column')
             columnElement.setAttribute('draggable', 'true')
 
@@ -70,6 +72,22 @@ const Column = {
             </p>`
             // обрабатываем новую колонку, чтобы в ней можно было боавлять новые заметки
             Column.process (columnElement)
+
+            const headerElement = columnElement.querySelector('.column-header')
+
+        headerElement.addEventListener('dblclick', function (event) {
+            columnElement.removeAttribute('draggable')
+            headerElement.setAttribute('contenteditable', true)
+            headerElement.focus()
+            
+        })
+
+        headerElement.addEventListener('blur', function (event) {
+            headerElement.removeAttribute('contenteditable', true)
+            columnElement.setAttribute('draggable', 'true')
+            // headerElement.textContent = Application.column.title
+            Application.save()
+        })
 
             return columnElement
         },

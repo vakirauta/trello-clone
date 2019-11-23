@@ -24,6 +24,7 @@ const Application = {
                 // Отыскиваем заметки и вынимаем id и пушим в объект с колонками
                 columnElement
                     .querySelectorAll('.note')
+
                     .forEach(noteElement => {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
                         // object.notes.items.push(this)
@@ -34,9 +35,13 @@ const Application = {
                         // const header = {
                         //     content: titleElement.textContent
                         // }
-                        column.title += titleElement.textContent
+                        // object.columns.items.push(titleElement.textContent)
+                        
+                        column.title = titleElement.textContent
+                        console.log(titleElement.textContent)
                     })
                 // Пушим Id колонок в объект Object.columns.item
+                
                 object.columns.items.push(column)
             })
                 // Находим,а затем обходим все заметки
@@ -52,7 +57,6 @@ const Application = {
                 
 
             const json = JSON.stringify(object)
-            console.log()
             localStorage.setItem('trello', json)
 
     },
@@ -70,7 +74,7 @@ const Application = {
 
         for (const column of object.columns.items) {
             const titleElement = Column.headerElement
-            const columnElement = Column.create(column.id, titleElement)
+            const columnElement = Column.create(column.id, column.title)
             
 
             mountePoint.append(columnElement)
@@ -80,12 +84,6 @@ const Application = {
 
                 const noteElement = Note.create(note.id, note.content)
                 columnElement.querySelector('[data-notes]').append(noteElement)
-            }
-            for (const headerTitle of column.title) {
-                const header = getNoteById(headerTitle)
-
-                const noteElement = Note.create(title.content)
-                columnElement.querySelector('.column-header').append(columnElement)
             }
 
         }
