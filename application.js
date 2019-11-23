@@ -37,8 +37,7 @@ const Application = {
                         // }
                         // object.columns.items.push(titleElement.textContent)
                         
-                        column.title = titleElement.textContent
-                        console.log(titleElement.textContent)
+                        // column.title = titleElement.textContent
                     })
                 // Пушим Id колонок в объект Object.columns.item
                 
@@ -58,6 +57,7 @@ const Application = {
 
             const json = JSON.stringify(object)
             localStorage.setItem('trello', json)
+            console.log(titleElement)
 
     },
 

@@ -70,7 +70,7 @@ const Column = {
             <p class="column-footer">
                 <span data-action-addNote class="action">+ Добавить карточку</span>
             </p>`
-            // обрабатываем новую колонку, чтобы в ней можно было боавлять новые заметки
+            // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
             Column.process (columnElement)
 
             const headerElement = columnElement.querySelector('.column-header')
