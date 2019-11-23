@@ -17,14 +17,12 @@ const Application = {
             .querySelectorAll('.column')
             .forEach(columnElement => {
                 const column = {
-                    title: '',
                     id: parseInt(columnElement.getAttribute('data-column-id')),
                     noteIds: []
                 }
                 // Отыскиваем заметки и вынимаем id и пушим в объект с колонками
                 columnElement
                     .querySelectorAll('.note')
-
                     .forEach(noteElement => {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
                         // object.notes.items.push(this)
@@ -36,12 +34,11 @@ const Application = {
                         //     content: titleElement.textContent
                         // }
                         // object.columns.items.push(titleElement.textContent)
-                        
-                        // column.title = titleElement.textContent
                     })
                 // Пушим Id колонок в объект Object.columns.item
                 
                 object.columns.items.push(column)
+                console.log(column.noteIds)
             })
                 // Находим,а затем обходим все заметки
             document
@@ -53,15 +50,13 @@ const Application = {
                     }
                     object.notes.items.push(note)
             })
-                
-
+            console.log(object)
             const json = JSON.stringify(object)
             localStorage.setItem('trello', json)
-            console.log(titleElement)
 
     },
 
-    load () {
+         load () {
         if (!localStorage.getItem('trello')) {
             return
         }
@@ -73,7 +68,7 @@ const Application = {
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
         for (const column of object.columns.items) {
-            const titleElement = Column.headerElement
+            // const titleElement = Column.headerElement
             const columnElement = Column.create(column.id, column.title)
             
 
@@ -85,7 +80,7 @@ const Application = {
                 const noteElement = Note.create(note.id, note.content)
                 columnElement.querySelector('[data-notes]').append(noteElement)
             }
-
+            console.log(column.noteIds)
         }
 
     }
