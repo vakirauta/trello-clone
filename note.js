@@ -66,6 +66,8 @@ const Note = {
         document
             .querySelectorAll('.note')
             .forEach(x => x.classList.remove('under'))
+
+            Application.save()
     },
     
     dragenter (event) {

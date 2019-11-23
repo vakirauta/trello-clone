@@ -18,25 +18,24 @@ const Column = {
             
 		})
         // ЗАГОЛОВОК
+        
         const headerElement = columnElement.querySelector('.column-header')
 
         headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
-            Application.save()
+            
         })
 
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
-            Application.save()
         })
-
+        
         columnElement.addEventListener('drop', function(event){
 			if (Note.dragged) {
 				return columnElement.querySelector('[data-notes]').append(Note.dragged)
 			}
 		})
-
         columnElement.addEventListener('dragstart', Column.dragstart)
         columnElement.addEventListener('dragend', Column.dragend)
         // columnElement.addEventListener('dragenter', Column.dragenter)
@@ -45,7 +44,7 @@ const Column = {
         columnElement.addEventListener('drop', Column.drop)
         },
 
-        create (id = null) {
+        create (id = null ) {
             const columnElement = document.createElement('div')
                 
             columnElement.classList.add('column')

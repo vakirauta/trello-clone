@@ -1,10 +1,15 @@
 const Application = {
     save () {
         const object = {
+            title: {
+                items: []
+            },
+
             columns: {
                 idCounter: Column.idCounter,
                 items: []
             },
+
             notes: {
                 idCounter: Note.idCounter,
                 items: []
@@ -15,7 +20,7 @@ const Application = {
             .querySelectorAll('.column')
             .forEach(columnElement => {
                 const column = {
-                    title: [],
+                    title: '',
                     id: parseInt(columnElement.getAttribute('data-column-id')),
                     noteIds: []
                 }
@@ -29,16 +34,14 @@ const Application = {
                 columnElement
                     .querySelectorAll('.column-header')
                     .forEach(titleElement => {
-                        const header = {
-                            content: titleElement.textContent
-                        }
-                        column.title.push(header.content)
+                        // const header = {
+                        //     content: titleElement.textContent
+                        // }
+                        object.title.items.push(titleElement.textContent)
+                        column.title += titleElement.textContent
                     })
                 // Пушим Id колонок в объект Object.columns.item
                 object.columns.items.push(column)
-                
-                console.log(column)
-            
             })
                 // Находим,а затем обходим все заметки
             document
@@ -70,7 +73,9 @@ const Application = {
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
         for (const column of object.columns.items) {
-            const columnElement = Column.create(column.id)
+            const titleElement = Column.headerElement
+            const columnElement = Column.create(column.id, titleElement)
+            
 
             mountePoint.append(columnElement)
 
