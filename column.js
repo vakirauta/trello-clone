@@ -22,6 +22,7 @@ const Column = {
         const headerElement = columnElement.querySelector('.column-header')
 
         headerElement.addEventListener('dblclick', function (event) {
+            columnElement.removeAttribute('draggable')
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
             
@@ -29,6 +30,8 @@ const Column = {
 
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
+            columnElement.setAttribute('draggable', 'true')
+            Application.save()
         })
         
         columnElement.addEventListener('drop', function(event){

@@ -1,9 +1,6 @@
 const Application = {
     save () {
         const object = {
-            title: {
-                items: []
-            },
 
             columns: {
                 idCounter: Column.idCounter,
@@ -37,7 +34,6 @@ const Application = {
                         // const header = {
                         //     content: titleElement.textContent
                         // }
-                        object.title.items.push(titleElement.textContent)
                         column.title += titleElement.textContent
                     })
                 // Пушим Id колонок в объект Object.columns.item
@@ -56,7 +52,7 @@ const Application = {
                 
 
             const json = JSON.stringify(object)
-
+            console.log()
             localStorage.setItem('trello', json)
 
     },
@@ -85,6 +81,13 @@ const Application = {
                 const noteElement = Note.create(note.id, note.content)
                 columnElement.querySelector('[data-notes]').append(noteElement)
             }
+            for (const headerTitle of column.title) {
+                const header = getNoteById(headerTitle)
+
+                const noteElement = Note.create(title.content)
+                columnElement.querySelector('.column-header').append(columnElement)
+            }
+
         }
 
     }
