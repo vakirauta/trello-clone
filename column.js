@@ -32,7 +32,7 @@ const Column = {
             headerElement.removeAttribute('contenteditable', true)
             columnElement.setAttribute('draggable', 'true')
             if (!headerElement.textContent) {
-                headerElement.innerHTML = "-----"
+                headerElement.innerHTML = "В плане"
             }
             Application.save()
         })
@@ -55,7 +55,6 @@ const Column = {
         create (id = null) {
 
             const columnElement = document.createElement('div')
-                
             
             columnElement.classList.add('column')
             columnElement.setAttribute('draggable', 'true')
@@ -77,7 +76,7 @@ const Column = {
             </p>`
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
             Column.process (columnElement)
-
+            
             return columnElement
         },
 

@@ -53,7 +53,9 @@ const Application = {
                     }
                     object.notes.items.push(note)
             })
+            // Сериализация object т.е. перевод в формат json
             const json = JSON.stringify(object)
+
             localStorage.setItem('trello', json)
 
     },
@@ -65,17 +67,17 @@ const Application = {
 
         const mountePoint = document.querySelector('.columns')
         mountePoint.innerHTML = ''
-
+        //Десериализовали object  т.е. восстановление первоначального состояния.
         const object = JSON.parse(localStorage.getItem('trello'))
+        // 
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
 
         for (const column of object.columns.items) {
-            // const titleElement = Column.headerElement
+
             const columnElement = Column.create(column.id, column.title)
             // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
             columnElement.querySelector('.column-header').textContent = column.title
-
             mountePoint.append(columnElement)
             
 
