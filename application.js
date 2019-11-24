@@ -32,14 +32,17 @@ const Application = {
                     .querySelectorAll('.column-header')
                     .forEach(titleElement => {
                         let header = {
-                            title: String(titleElement.textContent)
+                            title: titleElement.textContent
                         }
-                        
+                        Column.process.headerElement = header.title
+
+                        column.title = header.title
                     })
                 // Пушим Id колонок в объект Object.columns.item
-                console.log(titleElement)
                 object.columns.items.push(column)
             })
+            
+            console.log(Application.save.object)
                 // Находим,а затем обходим все заметки
             document
                 .querySelectorAll('.note')

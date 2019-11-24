@@ -31,6 +31,7 @@ const Column = {
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
             columnElement.setAttribute('draggable', 'true')
+            headerElement.textContent = title
             Application.save()
         })
         
