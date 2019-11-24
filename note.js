@@ -1,5 +1,6 @@
 class Note {
     constructor (id = null, content = '') {
+
         const element = this.element = document.createElement('div')
 			element.classList.add('note')
             element.setAttribute('draggable', 'true')
@@ -50,6 +51,7 @@ class Note {
     
     dragend (event) {
         event.preventDefault()
+
         Note.dragged = null
         this.element.classList.remove('dragged')
     
@@ -62,7 +64,8 @@ class Note {
     
     dragenter (event) {
         event.preventDefault()
-        if (this.element === Note.dragged) {
+
+        if (!Note.dragged || this.element === Note.dragged) {
             return
         }
         this.element.classList.add('under')
@@ -71,14 +74,14 @@ class Note {
     dragover (event) {
         event.preventDefault()
     
-        if (this.element === Note.dragged) {
+        if (!Note.dragged || this.element === Note.dragged) {
             return
         }
         // this.element.elementclassList.remove('under')
     }
     
     dragleave (event) {
-        if (this.element === Note.dragged) {
+        if (!Note.dragged || this.element === Note.dragged) {
             return
         }
         this.element.classList.remove('under')

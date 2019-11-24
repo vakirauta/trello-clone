@@ -56,7 +56,6 @@ const Application = {
             const json = JSON.stringify(object)
 
             localStorage.setItem('trello', json)
-            console.log(object)
     },
 
          load () {
@@ -72,13 +71,12 @@ const Application = {
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
 
-        for (const {id, noteIds} of object.columns.items) {
+        for (const {id, title, noteIds} of object.columns.items) {
 
             const column = new Column(id)
             // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
-            column.element.querySelector('.column-header').textContent = column.element.title
+            column.element.querySelector('.column-header').textContent = title
             mountePoint.append(column.element)
-            console.log(column.element.querySelector('.column-header').textContent)
             for (const noteId of noteIds) {
                 const {id, content} = getNoteById(noteId)
 

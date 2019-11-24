@@ -14,11 +14,11 @@ Application.load()
         .querySelector('[data-action-addColumn]')
         // вешаем событие
         .addEventListener ('click', function (event) {
-                    const columnElement = Column.create()
+                    const column = new Column
                     // вставляем новую колонку
-                    document.querySelector('.columns').append(columnElement)
-                    columnElement.querySelector('.column-header').setAttribute('contenteditable', true)
-                    columnElement.querySelector('.column-header').focus()
+                    document.querySelector('.columns').append(column.element)
+                    column.element.querySelector('.column-header').setAttribute('contenteditable', true)
+                    column.element.querySelector('.column-header').focus()
                     
                     Application.save()
              }

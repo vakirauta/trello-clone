@@ -1,5 +1,9 @@
 class Column {
-    constructor (id = null, title = '') {
+    constructor (id = null) {
+        const instance = this
+
+        this.notes = []
+
         const element = this.element = document.createElement('div')
             element.classList.add('column')
             element.setAttribute('draggable', 'true')
@@ -23,14 +27,14 @@ class Column {
             const spanAction_addNote = element.querySelector('[data-action-addNote]')
         // КНОПКА ДОБАВИТЬ КАРТОЧКУ
 		    spanAction_addNote.addEventListener('click', function (event) {
-
-            // СОЗДАТЬ КАРТОЧКУ
-            const noteElement = Note.create()
+                // СОЗДАТЬ КАРТОЧКУ
+                const note = new Note
+                instance.add(note)
 			
-			element.querySelector('[data-notes]').append(noteElement)
+			element.querySelector('[data-notes]').append(note.element)
 
-			noteElement.setAttribute('contenteditable', 'true')
-            noteElement.focus()
+			note.element.setAttribute('contenteditable', 'true')
+            note.element.focus()
             
 		})
         // ЗАГОЛОВОК
@@ -46,9 +50,8 @@ class Column {
 
             headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
-            headerElement.textContent = 'Говно'
             if (!headerElement.textContent) {
-                headerElement.innerHTML = "В плане"
+                headerElement.textContent = "В плане"
             }
             Application.save()
         })
@@ -65,6 +68,16 @@ class Column {
         // columnElement.addEventListener('dragleave', Column.dragleave)
         element.addEventListener('drop', this.drop.bind(this))
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
+    }
+
+    add (...notes) {
+        for (const note of notes) {
+            if (!this.notes.includes(note)) {
+                this.notes.push(note)
+
+                this.element.querySelector('[data-notes]').append(note.element)
+            }
+        }
     }
 
     dragstart (event) {
@@ -128,7 +141,7 @@ class Column {
     
         document
             .querySelectorAll('.column')
-            .forEach(element => element.classList.remove('under'))
+            .forEach(columnElement => columnElement.classList.remove('under'))
     
         this.element.classList.add('under')
     }
@@ -145,7 +158,7 @@ class Column {
         //     console.log(Note.dragged)
         // }
     
-        else if (this.element.parentElement === Column.dragged.parentElement) {
+        else if (this.parentElement === Column.dragged.parentElement) {
             const children = Array.from(document.querySelector('.columns').children)
             const indexA = children.indexOf(this.element)
             const indexB = children.indexOf(Column.dragged)
@@ -165,7 +178,7 @@ class Column {
         }  
         document
             .querySelectorAll('.column')
-            .forEach(element => element.classList.remove('under'))
+            .forEach(columnElement => columnElement.classList.remove('under'))
     }
 }
 
