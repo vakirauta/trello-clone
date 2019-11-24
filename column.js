@@ -17,23 +17,6 @@ const Column = {
             noteElement.focus()
             
 		})
-        // ЗАГОЛОВОК
-        
-        const headerElement = columnElement.querySelector('.column-header')
-
-        headerElement.addEventListener('dblclick', function (event) {
-            columnElement.removeAttribute('draggable')
-            headerElement.setAttribute('contenteditable', true)
-            headerElement.focus()
-            
-        })
-
-        headerElement.addEventListener('blur', function (event) {
-            headerElement.removeAttribute('contenteditable', true)
-            columnElement.setAttribute('draggable', 'true')
-            headerElement.textContent = title
-            Application.save()
-        })
         
         columnElement.addEventListener('drop', function(event){
 			if (Note.dragged) {
@@ -46,6 +29,23 @@ const Column = {
         columnElement.addEventListener('dragover', Column.dragover)
         // columnElement.addEventListener('dragleave', Column.dragleave)
         columnElement.addEventListener('drop', Column.drop)
+        },
+        // ЗАГОЛОВОК
+        header () {
+            const headerElement = columnElement.querySelector('.column-header')
+
+        headerElement.addEventListener('dblclick', function (event) {
+            columnElement.removeAttribute('draggable')
+            headerElement.setAttribute('contenteditable', true)
+            headerElement.focus()
+            
+        })
+
+        headerElement.addEventListener('blur', function (event) {
+            headerElement.removeAttribute('contenteditable', true)
+            columnElement.setAttribute('draggable', 'true')
+        })
+        Application.save()
         },
 
         create (id = null) {

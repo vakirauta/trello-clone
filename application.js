@@ -35,14 +35,15 @@ const Application = {
                             title: titleElement.textContent
                         }
                         Column.process.headerElement = header.title
+                        header.title = Column.process.headerElement
 
                         column.title = header.title
                     })
+                    
+                    
                 // Пушим Id колонок в объект Object.columns.item
                 object.columns.items.push(column)
             })
-            
-            console.log(Application.save.object)
                 // Находим,а затем обходим все заметки
             document
                 .querySelectorAll('.note')
@@ -66,8 +67,12 @@ const Application = {
         const mountePoint = document.querySelector('.columns')
         mountePoint.innerHTML = ''
 
+        Column.process.headerElement
+        console.log(Column.process.headerElement)
+
         const object = JSON.parse(localStorage.getItem('trello'))
         const getNoteById = id => object.notes.items.find(note => note.id === id)
+
 
         for (const column of object.columns.items) {
             // const titleElement = Column.headerElement
@@ -81,8 +86,13 @@ const Application = {
 
                 const noteElement = Note.create(note.id, note.content)
                 columnElement.querySelector('[data-notes]').append(noteElement)
+                console.log(content)
             }
-            console.log(column)
+
+            // for (const titl of column.title) {
+            //     const columnHeader = titleElement.append()
+            // }
+            
         }
 
     }
