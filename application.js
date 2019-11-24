@@ -75,7 +75,7 @@ const Application = {
             const columnElement = Column.create(column.id, column.title)
             // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
             columnElement.querySelector('.column-header').textContent = column.title
-            
+
             mountePoint.append(columnElement)
             
 
