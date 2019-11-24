@@ -17,7 +17,7 @@ const Application = {
             .querySelectorAll('.column')
             .forEach(columnElement => {
                 const column = {
-                    title: ' ',
+                    title: '',
                     id: parseInt(columnElement.getAttribute('data-column-id')),
                     noteIds: []
                 }
@@ -35,7 +35,6 @@ const Application = {
                             title: titleElement.textContent
                         }
                         Column.process.headerElement = header.title
-                        header.title = Column.process.headerElement
 
                         column.title = header.title
                     })
@@ -67,9 +66,6 @@ const Application = {
         const mountePoint = document.querySelector('.columns')
         mountePoint.innerHTML = ''
 
-        Column.process.headerElement
-        console.log(Column.process.headerElement)
-
         const object = JSON.parse(localStorage.getItem('trello'))
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
@@ -77,22 +73,16 @@ const Application = {
         for (const column of object.columns.items) {
             // const titleElement = Column.headerElement
             const columnElement = Column.create(column.id, column.title)
-            
-
+            columnElement.querySelector('.column-header').textContent = column.title
             mountePoint.append(columnElement)
+            
 
             for (const noteId of column.noteIds) {
                 const note = getNoteById(noteId)
 
                 const noteElement = Note.create(note.id, note.content)
                 columnElement.querySelector('[data-notes]').append(noteElement)
-                console.log(content)
             }
-
-            // for (const titl of column.title) {
-            //     const columnHeader = titleElement.append()
-            // }
-            
         }
 
     }

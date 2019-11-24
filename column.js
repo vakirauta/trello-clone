@@ -17,7 +17,23 @@ const Column = {
             noteElement.focus()
             
 		})
+        // ЗАГОЛОВОК
         
+        const headerElement = columnElement.querySelector('.column-header')
+
+        headerElement.addEventListener('dblclick', function (event) {
+            columnElement.removeAttribute('draggable')
+            headerElement.setAttribute('contenteditable', true)
+            headerElement.focus()
+            
+        })
+
+        headerElement.addEventListener('blur', function (event) {
+            headerElement.removeAttribute('contenteditable', true)
+            columnElement.setAttribute('draggable', 'true')
+            Application.save()
+        })
+
         columnElement.addEventListener('drop', function(event){
 			if (Note.dragged) {
 				return columnElement.querySelector('[data-notes]').append(Note.dragged)
@@ -30,23 +46,8 @@ const Column = {
         // columnElement.addEventListener('dragleave', Column.dragleave)
         columnElement.addEventListener('drop', Column.drop)
         },
-        // ЗАГОЛОВОК
-        header () {
-            const headerElement = columnElement.querySelector('.column-header')
-
-        headerElement.addEventListener('dblclick', function (event) {
-            columnElement.removeAttribute('draggable')
-            headerElement.setAttribute('contenteditable', true)
-            headerElement.focus()
-            
-        })
-
-        headerElement.addEventListener('blur', function (event) {
-            headerElement.removeAttribute('contenteditable', true)
-            columnElement.setAttribute('draggable', 'true')
-        })
-        Application.save()
-        },
+        
+        
 
         create (id = null) {
 
@@ -73,22 +74,6 @@ const Column = {
             </p>`
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
             Column.process (columnElement)
-
-            const headerElement = columnElement.querySelector('.column-header')
-
-        headerElement.addEventListener('dblclick', function (event) {
-            columnElement.removeAttribute('draggable')
-            headerElement.setAttribute('contenteditable', true)
-            headerElement.focus()
-            
-        })
-
-        headerElement.addEventListener('blur', function (event) {
-            headerElement.removeAttribute('contenteditable', true)
-            columnElement.setAttribute('draggable', 'true')
-            // headerElement.textContent = Application.column.title
-            Application.save()
-        })
 
             return columnElement
         },

@@ -8,7 +8,7 @@
 // Создание новой колонки
 // находим кнопку для добавления колонки
 
-Application.load()
+Application.load() 
 
     document
         .querySelector('[data-action-addColumn]')
