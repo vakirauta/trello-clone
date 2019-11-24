@@ -20,14 +20,14 @@ class Column {
                 <span data-action-addNote class="action">+ Добавить карточку</span>
             </p>`
 
-            const spanAction_addNote = columnElement.querySelector('[data-action-addNote]')
+            const spanAction_addNote = element.querySelector('[data-action-addNote]')
         // КНОПКА ДОБАВИТЬ КАРТОЧКУ
 		spanAction_addNote.addEventListener('click', function (event) {
 
             // СОЗДАТЬ КАРТОЧКУ
             const noteElement = Note.create()
 			
-			columnElement.querySelector('[data-notes]').append(noteElement)
+			element.querySelector('[data-notes]').append(noteElement)
 
 			noteElement.setAttribute('contenteditable', 'true')
             noteElement.focus()
@@ -38,7 +38,6 @@ class Column {
         const headerElement = element.querySelector('.column-header')
 
         headerElement.addEventListener('dblclick', function (event) {
-            element.removeAttribute('draggable')
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
             
@@ -46,30 +45,30 @@ class Column {
 
         headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
-            element.setAttribute('draggable', 'true')
             if (!headerElement.textContent) {
                 headerElement.innerHTML = "В плане"
             }
             Application.save()
+            return element
         })
 
-        element.addEventListener('drop', function(event){
-			if (Note.dragged) {
-				return element.querySelector('[data-notes]').append(Note.dragged)
-			}
-		})
-        element.addEventListener('dragstart', Column.dragstart.bind(this))
-        element.addEventListener('dragend', Column.dragend.bind(this))
+        // element.addEventListener('drop', function(event){
+		// 	if (Note.dragged) {
+		// 		return element.querySelector('[data-notes]').append(Note.dragged)
+		// 	}
+		// })
+        element.addEventListener('dragstart', this.dragstart.bind(this))
+        element.addEventListener('dragend', this.dragend.bind(this))
         // columnElement.addEventListener('dragenter', Column.dragenter)
-        element.addEventListener('dragover', Column.dragover.bind(this))
+        element.addEventListener('dragover', this.dragover.bind(this))
         // columnElement.addEventListener('dragleave', Column.dragleave)
-        element.addEventListener('drop', Column.drop.bind(this))
+        element.addEventListener('drop', this.drop.bind(this))
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
     }
 
     dragstart (event) {
-        Column.dragged = this
-        Column.dragged.classList.add('dragged')
+        Column.dragged = this.element
+        this.element.classList.add('dragged')
     
         event.stopPropagation()
 
