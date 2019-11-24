@@ -1,5 +1,5 @@
 class Column {
-    constructor (id = null) {
+    constructor (id = null, title = '') {
         const element = this.element = document.createElement('div')
             element.classList.add('column')
             element.setAttribute('draggable', 'true')
@@ -22,7 +22,7 @@ class Column {
 
             const spanAction_addNote = element.querySelector('[data-action-addNote]')
         // КНОПКА ДОБАВИТЬ КАРТОЧКУ
-		spanAction_addNote.addEventListener('click', function (event) {
+		    spanAction_addNote.addEventListener('click', function (event) {
 
             // СОЗДАТЬ КАРТОЧКУ
             const noteElement = Note.create()
@@ -37,19 +37,20 @@ class Column {
         
         const headerElement = element.querySelector('.column-header')
 
-        headerElement.addEventListener('dblclick', function (event) {
+            headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
             
+            console.log(headerElement.textContent)
         })
 
-        headerElement.addEventListener('blur', function (event) {
+            headerElement.addEventListener('blur', function (event) {
             headerElement.removeAttribute('contenteditable', true)
+            headerElement.textContent = 'Говно'
             if (!headerElement.textContent) {
                 headerElement.innerHTML = "В плане"
             }
             Application.save()
-            return element
         })
 
         // element.addEventListener('drop', function(event){
@@ -68,7 +69,7 @@ class Column {
 
     dragstart (event) {
         Column.dragged = this.element
-        this.element.classList.add('dragged')
+        Column.dragged.classList.add('dragged')
     
         event.stopPropagation()
 
@@ -127,7 +128,7 @@ class Column {
     
         document
             .querySelectorAll('.column')
-            .forEach(columnElement => columnElement.classList.remove('under'))
+            .forEach(element => element.classList.remove('under'))
     
         this.element.classList.add('under')
     }
@@ -164,7 +165,7 @@ class Column {
         }  
         document
             .querySelectorAll('.column')
-            .forEach(columnElement => columnElement.classList.remove('under'))
+            .forEach(element => element.classList.remove('under'))
     }
 }
 

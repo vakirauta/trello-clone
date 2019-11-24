@@ -24,15 +24,12 @@ Application.load()
              }
         )
 // редактирование заметок при двойном клике
-// находим все заметки
-    document
-        .querySelectorAll('.note')
-        // вешаем на каждую заметку функцию,которая позволяет их редактировать
-        .forEach(Note.process)
+// // находим все заметки
 
-        document.querySelector('.columns').addEventListener('dragover', function (event) {
-			event.preventDefault()
-		})       
+document
+.querySelectorAll('.note')
+// вешаем на каждую заметку функцию,которая позволяет их редактировать
+.forEach.bind(new Note)
 
 
     

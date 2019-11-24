@@ -37,6 +37,8 @@ class Note {
         element.addEventListener('dragover', this.dragover.bind(this))
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
+        
+            
 
     }
     dragstart (event) {

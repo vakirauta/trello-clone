@@ -15,27 +15,26 @@ const Application = {
         // Создаем объект с колонками, в который вставляем найденные id колонок и записок
         document
             .querySelectorAll('.column')
-            .forEach(columnElement => {
+            .forEach(element => {
                 const column = {
                     title: '',
-                    id: parseInt(columnElement.getAttribute('data-column-id')),
+                    id: parseInt(element.getAttribute('data-column-id')),
                     noteIds: []
                 }
                 // Отыскиваем заметки и вынимаем id и пушим в объект с колонками
-                columnElement
+                element
                     .querySelectorAll('.note')
                     .forEach(noteElement => {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
                         // object.notes.items.push(this)
                     })
                     // Отыскиваем ЗАГОЛОВКИ колонок и передаем в объект column.title
-                columnElement
+                element
                     .querySelectorAll('.column-header')
                     .forEach(titleElement => {
                         let header = {
                             title: titleElement.textContent
                         }
-
                         column.title = header.title
                     })
                     
@@ -57,7 +56,7 @@ const Application = {
             const json = JSON.stringify(object)
 
             localStorage.setItem('trello', json)
-
+            console.log(object)
     },
 
          load () {
@@ -73,19 +72,18 @@ const Application = {
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
 
-        for (const {id, noteIds, title} of object.columns.items) {
+        for (const {id, noteIds} of object.columns.items) {
 
-            const columnElement = new Column(id, title)
+            const column = new Column(id)
             // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
-            columnElement.querySelector('.column-header').textContent = column.title
-            mountePoint.append(columnElement)
-            
-
+            column.element.querySelector('.column-header').textContent = column.element.title
+            mountePoint.append(column.element)
+            console.log(column.element.querySelector('.column-header').textContent)
             for (const noteId of noteIds) {
                 const {id, content} = getNoteById(noteId)
 
                 const note = new Note(id, content)
-                columnElement.querySelector('[data-notes]').append(note.element)
+                column.element.querySelector('[data-notes]').append(note.element)
             }
         }
 
