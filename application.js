@@ -28,13 +28,13 @@ const Application = {
                         column.noteIds.push(parseInt(noteElement.getAttribute('data-note-id')))
                         // object.notes.items.push(this)
                     })
+                    // Отыскиваем ЗАГОЛОВКИ колонок и передаем в объект column.title
                 columnElement
                     .querySelectorAll('.column-header')
                     .forEach(titleElement => {
                         let header = {
                             title: titleElement.textContent
                         }
-                        Column.process.headerElement = header.title
 
                         column.title = header.title
                     })
@@ -73,7 +73,9 @@ const Application = {
         for (const column of object.columns.items) {
             // const titleElement = Column.headerElement
             const columnElement = Column.create(column.id, column.title)
+            // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
             columnElement.querySelector('.column-header').textContent = column.title
+            
             mountePoint.append(columnElement)
             
 
