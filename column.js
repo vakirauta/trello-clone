@@ -1,6 +1,6 @@
 class Column {
     constructor (id = null) {
-        const element = this.elementdocument.createElement('div')
+        const element = this.element = document.createElement('div')
             element.classList.add('column')
             element.setAttribute('draggable', 'true')
 

@@ -73,15 +73,15 @@ const Application = {
         const getNoteById = id => object.notes.items.find(note => note.id === id)
 
 
-        for (const column of object.columns.items) {
+        for (const {id, noteIds, title} of object.columns.items) {
 
-            const columnElement = Column.create(column.id, column.title)
+            const columnElement = new Column(id, title)
             // Вытаскиваем(загружаем) сохраненные в save() заголовки из column.title
             columnElement.querySelector('.column-header').textContent = column.title
             mountePoint.append(columnElement)
             
 
-            for (const noteId of column.noteIds) {
+            for (const noteId of noteIds) {
                 const {id, content} = getNoteById(noteId)
 
                 const note = new Note(id, content)
