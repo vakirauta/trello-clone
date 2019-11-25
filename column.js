@@ -149,18 +149,22 @@ class Column {
     drop (event) {
         event.stopPropagation()
 
-        // if (!Column.dragged || this.element === Column.dragged) {
-        //     return
+        if (!Column.dragged || this.element === Column.dragged) {
+            return
+        }
+
+        // if(Note.dragged) {
+        //     return this.element.querySelector('[data-notes]').append(Note.dragged)
         // }
 
-        if (Note.dragged) {
-            this.element.querySelector('[data-notes]').append(Note.dragged)
-        }
+        // if (Note.dragged) {
+        //     this.element.querySelector('[data-notes]').append(Note.dragged)
+        // }
     
-        else if (this.element.parentElement === Column.dragged.parentElement) {
-            const children = Array.from(document.querySelector('.columns').children)
-            const indexA = children.indexOf(this.element)
-            const indexB = children.indexOf(Column.dragged)
+        if (this.element.parentElement === Column.dragged.parentElement) {
+            const column = Array.from(document.querySelector('.columns').children)
+            const indexA = column.indexOf(this.element)
+            const indexB = column.indexOf(Column.dragged)
     
             if(indexA < indexB) {
                 // Вставляем переносимый элемент перед которым делаем дроп
@@ -175,7 +179,7 @@ class Column {
         else {
             this.element.parentElement.insertBefore(Column.dragged, this.element) 
         }  
-        console.log('cdt')
+        console.log(Column.dragged)
         document
             .querySelectorAll('.column')
             .forEach(columnElement => columnElement.classList.remove('under'))

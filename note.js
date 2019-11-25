@@ -79,25 +79,25 @@ class Note {
     }
     
     dragleave (event) {
-        if (!Note.dragged || this === Note.dragged) {
+        if (!Note.dragged || this.element === Note.dragged) {
             return
         }
         this.element.classList.remove('under')
     }
     
     drop (event) {
-        // event.stopPropagation()
+        event.stopPropagation()
 
-        if (!Note.dragged || this.element === Note.dragged) {
-            // console.log('wtf')
-            return
+        if (Column.dragged) {
+            this.element.parentElement.insertBefore(Note.dragged, this.element)
+            console.log('wtf')
         }
     
         if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this.element)
             const indexB = note.indexOf(Note.dragged)
-    
+            console.log(Note.dragged)
             if (indexA < indexB) {
                 this.element.parentElement.insertBefore(Note.dragged, this.element)
                 // console.log('wtf')
@@ -108,13 +108,9 @@ class Note {
                 // console.log('wtf')
             }
         }
-        // if (this.element.parentElement === '') {
-        //     console.log('wtf')
-        //     }
     
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
-            console.log(Note.dragged.parentElement)
         }
 
         
