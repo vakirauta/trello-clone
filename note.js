@@ -45,7 +45,7 @@ class Note {
     dragstart (event) {
         Note.dragged = this.element
         this.element.classList.add('dragged')
-    
+
         event.stopPropagation()
     }
     
@@ -54,7 +54,7 @@ class Note {
 
         Note.dragged = null
         this.element.classList.remove('dragged')
-    
+
         document
             .querySelectorAll('.note')
             .forEach(x => x.classList.remove('under'))
@@ -64,7 +64,6 @@ class Note {
     
     dragenter (event) {
         event.preventDefault()
-
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -73,7 +72,6 @@ class Note {
     
     dragover (event) {
         event.preventDefault()
-    
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -81,16 +79,17 @@ class Note {
     }
     
     dragleave (event) {
-        if (!Note.dragged || this.element === Note.dragged) {
+        if (!Note.dragged || this === Note.dragged) {
             return
         }
         this.element.classList.remove('under')
     }
     
     drop (event) {
-        event.stopPropagation()
+        // event.stopPropagation()
 
         if (!Note.dragged || this.element === Note.dragged) {
+            // console.log('wtf')
             return
         }
     
@@ -101,18 +100,24 @@ class Note {
     
             if (indexA < indexB) {
                 this.element.parentElement.insertBefore(Note.dragged, this.element)
-    
+                // console.log('wtf')
             }
             
             else {
                 this.element.parentElement.insertBefore(Note.dragged, this.element.nextElementSibling)
-                console.log('wtf')
+                // console.log('wtf')
             }
         }
+        // if (this.element.parentElement === '') {
+        //     console.log('wtf')
+        //     }
     
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
+            console.log(Note.dragged.parentElement)
         }
+
+        
     }
 }
 
