@@ -158,7 +158,7 @@ class Column {
         //     console.log(Note.dragged)
         // }
     
-        else if (this.parentElement === Column.dragged.parentElement) {
+        else if (this.element.parentElement === Column.dragged.parentElement) {
             const children = Array.from(document.querySelector('.columns').children)
             const indexA = children.indexOf(this.element)
             const indexB = children.indexOf(Column.dragged)

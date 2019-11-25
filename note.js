@@ -89,11 +89,12 @@ class Note {
     
     drop (event) {
         event.stopPropagation()
+
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
     
-        if (this.element.parentElement === Note.dragged.parentElement) {
+        else if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this.element)
             const indexB = note.indexOf(Note.dragged)
