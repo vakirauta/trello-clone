@@ -92,7 +92,7 @@ class Column {
     }
     
     dragend (event) {
-        Column.dragged = null
+        Column.dragged = this.element
         Column.dropped = null
         this.element.classList.remove('dragged')
     
@@ -152,13 +152,13 @@ class Column {
         if (!Column.dragged || this.element === Column.dragged) {
             return
         }
-
-        // if(Note.dragged) {
-        //     return this.element.querySelector('[data-notes]').append(Note.dragged)
-        // }
+        
 
         // if (Note.dragged) {
-        //     this.element.querySelector('[data-notes]').append(Note.dragged)
+        //     document.querySelectorAll('[data-notes]')
+        //         .forEach(element => {
+        //             this.element.append(Note.dragged)
+        //     })
         // }
     
         if (this.element.parentElement === Column.dragged.parentElement) {

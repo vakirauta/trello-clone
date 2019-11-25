@@ -88,9 +88,9 @@ class Note {
     drop (event) {
         event.stopPropagation()
 
-        if (Column.dragged) {
+        if (!Note.dragged.parentElement) {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
-            console.log('wtf')
+            console.log(Note.dragged)
         }
     
         if (this.element.parentElement === Note.dragged.parentElement) {
