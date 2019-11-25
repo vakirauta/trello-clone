@@ -94,7 +94,7 @@ class Note {
             return
         }
     
-        else if (this.element.parentElement === Note.dragged.parentElement) {
+        if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this.element)
             const indexB = note.indexOf(Note.dragged)
