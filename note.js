@@ -106,6 +106,7 @@ class Note {
             
             else {
                 this.element.parentElement.insertBefore(Note.dragged, this.element.nextElementSibling)
+                console.log('wtf')
             }
         }
     
