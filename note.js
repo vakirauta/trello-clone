@@ -48,14 +48,15 @@ class Note {
     }
 
     dragstart (event) {
+        event.stopPropagation()
         Note.dragged = this.element
         this.element.classList.add('dragged')
-
-        event.stopPropagation()
+        console.log('1')
+        
     }
     
     dragend (event) {
-
+        event.stopPropagation()
         Note.dragged = null
         this.element.classList.remove('dragged')
 
@@ -64,17 +65,20 @@ class Note {
             .forEach(x => x.classList.remove('under'))
     
             Application.save()
+            console.log('2')
     }
     
     dragenter (event) {
-        event.preventDefault()
+        // event.preventDefault()
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
         this.element.classList.add('under')
+        console.log(Column.dragged)
     }
     
     dragover (event) {
+        event.preventDefault()
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -82,6 +86,7 @@ class Note {
     }
     
     dragleave (event) {
+        event.stopPropagation()
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -89,11 +94,12 @@ class Note {
     }
     
     drop (event) {
-        let data_notes = document.querySelectorAll('[data-notes]')
-        
-        if (Note.dragged) {
-            console.log(data_notes)
+        event.stopPropagation()
+
+        if(!Note.dragged || this.element === Note.dragged) {
+            return
         }
+
     
         else if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
@@ -102,17 +108,18 @@ class Note {
 
             if (indexA < indexB) {
                 this.element.parentElement.insertBefore(Note.dragged, this.element)
-                console.log('wtf')
+                console.log('вставляю выше')
             }
             
             else {
                 this.element.parentElement.insertBefore(Note.dragged, this.element.nextElementSibling)
-                console.log(element)
+                console.log('вставляю ниже')
             }
         }
     
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
+            console.log('вставляю в соседний столбец')
         }
 
         

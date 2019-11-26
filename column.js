@@ -92,6 +92,7 @@ class Column {
     }
     
     dragend (event) {
+        event.preventDefault()
         Column.dragged = null
         Column.dropped = null
         this.element.classList.remove('dragged')
@@ -125,7 +126,6 @@ class Column {
     
      dragover (event) {
          event.preventDefault()
-         event.stopPropagation()
     
          if (Column.dragged === this.element) {
              if (Column.dropped) {
@@ -150,14 +150,11 @@ class Column {
         event.stopPropagation()
 
         if (!Column.dragged || this.element === Column.dragged) {
-            Column.dragged = this.element
+            return
         }
 
         if (Note.dragged) {
-            document.querySelectorAll('[data-notes]')
-                .forEach(element => {
-                    this.element.insertBefore(Note.dragged, Note.element)
-            })
+            return this.element.querySelector('[data-notes]').append(Note.dragged)
         }
     
         if (this.element.parentElement === Column.dragged.parentElement) {
