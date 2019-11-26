@@ -31,6 +31,11 @@ document
 // вешаем на каждую заметку функцию,которая позволяет их редактировать
 .forEach.bind(new Note)
 
+let delet = document.querySelector('.del')
+delet.addEventListener('click', function() {
+   return  console.log(delet)
+})
+
 
     
 

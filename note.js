@@ -31,6 +31,8 @@ class Note {
             }
             Application.save()
         })
+
+        
     
         element.addEventListener('dragstart', this.dragstart.bind(this))
         element.addEventListener('dragend', this.dragend.bind(this))
@@ -39,6 +41,7 @@ class Note {
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
         
+
             
 
     }
@@ -51,7 +54,6 @@ class Note {
         event.stopPropagation()
         Note.dragged = this.element
         this.element.classList.add('dragged')
-        console.log('1')
         
     }
     
@@ -65,7 +67,6 @@ class Note {
             .forEach(x => x.classList.remove('under'))
     
             Application.save()
-            console.log('2')
     }
     
     dragenter (event) {
@@ -73,8 +74,15 @@ class Note {
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
+        let delet = document.querySelector('.del')
+        delet.addEventListener('click', function() {
+        return  console.log(delet)
+        })
+
+        if(this.element === delet) {
+            console.log('1')
+        }
         this.element.classList.add('under')
-        console.log(Column.dragged)
     }
     
     dragover (event) {
@@ -95,11 +103,11 @@ class Note {
     
     drop (event) {
         event.stopPropagation()
+        
 
         if(!Note.dragged || this.element === Note.dragged) {
             return
         }
-
     
         else if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))

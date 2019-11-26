@@ -2,7 +2,7 @@ class Column {
     constructor (id = null) {
         const instance = this
 
-        this.notes = []
+       this.notes = []
 
         const element = this.element = document.createElement('div')
             element.classList.add('column')
@@ -44,8 +44,6 @@ class Column {
             headerElement.addEventListener('dblclick', function (event) {
             headerElement.setAttribute('contenteditable', true)
             headerElement.focus()
-            
-            console.log(headerElement.textContent)
         })
 
             headerElement.addEventListener('blur', function (event) {
@@ -126,7 +124,16 @@ class Column {
     
      dragover (event) {
          event.preventDefault()
-    
+
+         let delet = document.querySelector('.del')
+         delet.addEventListener('click', function() {
+         return  console.log(delet)
+         })
+
+         if (Column.dragged  === delet) {
+            console.log('wtf')
+        }
+
          if (Column.dragged === this.element) {
              if (Column.dropped) {
                 Column.dropped.classList.remove('under')
@@ -149,12 +156,14 @@ class Column {
     drop (event) {
         event.stopPropagation()
 
-        if (!Column.dragged || this.element === Column.dragged) {
-            return
-        }
-
+        
+        // Эта проклятая запись попила моей крови,без нее записки не вставятся в пустой столбец
         if (Note.dragged) {
             return this.element.querySelector('[data-notes]').append(Note.dragged)
+        }
+
+        if (delet) {
+            console.log('wtf')
         }
     
         if (this.element.parentElement === Column.dragged.parentElement) {
