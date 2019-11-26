@@ -153,12 +153,12 @@ class Column {
             Column.dragged = this.element
         }
 
-        // if (Note.dragged) {
-        //     document.querySelectorAll('[data-notes]')
-        //         .forEach(element => {
-        //             this.element.append(Note.dragged)
-        //     })
-        // }
+        if (Note.dragged) {
+            document.querySelectorAll('[data-notes]')
+                .forEach(element => {
+                    this.element.insertBefore(Note.dragged, Note.element)
+            })
+        }
     
         if (this.element.parentElement === Column.dragged.parentElement) {
             const column = Array.from(document.querySelector('.columns').children)

@@ -89,24 +89,25 @@ class Note {
     }
     
     drop (event) {
-
-        if (!Note.dragged || this.element === Note.dragged) {
-            return
+        let data_notes = document.querySelectorAll('[data-notes]')
+        
+        if (Note.dragged) {
+            console.log(data_notes)
         }
     
-        if (this.element.parentElement === Note.dragged.parentElement) {
+        else if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this.element)
             const indexB = note.indexOf(Note.dragged)
 
             if (indexA < indexB) {
                 this.element.parentElement.insertBefore(Note.dragged, this.element)
-                // console.log('wtf')
+                console.log('wtf')
             }
             
             else {
                 this.element.parentElement.insertBefore(Note.dragged, this.element.nextElementSibling)
-                // console.log('wtf')
+                console.log(element)
             }
         }
     
