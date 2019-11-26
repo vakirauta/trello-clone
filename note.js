@@ -42,6 +42,11 @@ class Note {
             
 
     }
+
+    get column() {
+        return this.element.closest('.column')
+    }
+
     dragstart (event) {
         Note.dragged = this.element
         this.element.classList.add('dragged')
@@ -50,7 +55,6 @@ class Note {
     }
     
     dragend (event) {
-        event.preventDefault()
 
         Note.dragged = null
         this.element.classList.remove('dragged')
@@ -71,7 +75,6 @@ class Note {
     }
     
     dragover (event) {
-        event.preventDefault()
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -86,18 +89,16 @@ class Note {
     }
     
     drop (event) {
-        event.stopPropagation()
 
-        if (!Note.dragged.parentElement) {
-            this.element.parentElement.insertBefore(Note.dragged, this.element)
-            console.log(Note.dragged)
+        if (!Note.dragged || this.element === Note.dragged) {
+            return
         }
     
         if (this.element.parentElement === Note.dragged.parentElement) {
             const note = Array.from(this.element.parentElement.querySelectorAll('.note'))
             const indexA = note.indexOf(this.element)
             const indexB = note.indexOf(Note.dragged)
-            console.log(Note.dragged)
+
             if (indexA < indexB) {
                 this.element.parentElement.insertBefore(Note.dragged, this.element)
                 // console.log('wtf')

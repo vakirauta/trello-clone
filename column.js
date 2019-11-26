@@ -92,7 +92,7 @@ class Column {
     }
     
     dragend (event) {
-        Column.dragged = this.element
+        Column.dragged = null
         Column.dropped = null
         this.element.classList.remove('dragged')
     
@@ -131,7 +131,7 @@ class Column {
              if (Column.dropped) {
                 Column.dropped.classList.remove('under')
              }
-             Column.dropped = null
+             Column.dropped = this.element
          }
          
          if (!Column.dragged || this.element === Column.dragged) {
@@ -150,9 +150,8 @@ class Column {
         event.stopPropagation()
 
         if (!Column.dragged || this.element === Column.dragged) {
-            return
+            Column.dragged = this.element
         }
-        
 
         // if (Note.dragged) {
         //     document.querySelectorAll('[data-notes]')
@@ -177,9 +176,8 @@ class Column {
             } 
         }
         else {
-            this.element.parentElement.insertBefore(Column.dragged, this.element) 
+            document.querySelector('.columns').insertBefore(Column.dragged, this.element) 
         }  
-        console.log(Column.dragged)
         document
             .querySelectorAll('.column')
             .forEach(columnElement => columnElement.classList.remove('under'))
