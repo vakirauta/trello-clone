@@ -149,7 +149,6 @@ class Column {
     
     drop (event) {
         event.stopPropagation()
-
         
         // Эта проклятая запись попила моей крови,без нее записки не вставятся в пустой столбец
         if (Note.dragged) {
@@ -173,6 +172,7 @@ class Column {
         }
         else {
             document.querySelector('.columns').insertBefore(Column.dragged, this.element) 
+            console.log(new Note(Del))
         }  
         document
             .querySelectorAll('.column')

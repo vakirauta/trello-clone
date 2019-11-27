@@ -23,51 +23,9 @@ Application.load()
                     Application.save()
              }
         )
-             
-
-             
-        const del = document.querySelector('[data-action-delElem]')
-        // вешаем событие
-
-        del.addEventListener('dragstart', dragstart())
-        del.addEventListener('dragend', dragend())
-
-        del.addEventListener ('dragenter', dragenter())
-        del.addEventListener ('dragleave', dragleave())
-        del.addEventListener ('dragover', dragover())
-        del.addEventListener ('drop', drop())
-
-
-        function dragenter (event) {
-            const column = new Column
-            if (column.element === del) {
-                console.log('hi')
-            }
-        }
-
-        function dragleave (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-
-        function dragover (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-
-        function drop (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-             
-    
-        
+        const del = document.querySelector('.del').addEventListener('click', function (){
+            console.log('click')
+        })      
 // редактирование заметок при двойном клике
 // // находим все заметки
 
