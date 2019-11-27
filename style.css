@@ -131,12 +131,9 @@ body {
 }
 
 .del {
-    display: flex;
+    display:flex;
     width: 150px;
     height: 150px;
-    background-image: url('http://source.unsplash.com/random/150x150');
     border: 1px solid black;
     border-radius: 5px;
-    align-items:center;
-    justify-content: center;
 }
