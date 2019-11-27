@@ -54,7 +54,8 @@ class Note {
         event.stopPropagation()
         Note.dragged = this.element
         this.element.classList.add('dragged')
-        console.log(2)
+
+        
         
     }
     
@@ -100,10 +101,9 @@ class Note {
     
     drop (event) {
         event.stopPropagation()
-        if (!new Note(Del)) {
-            Note.dragged.remove()
-            console.log(this.element)
-        }
+        // if (Note.Del) {
+        //     console.log(Note.Del)
+        // }
 
         if(!Note.dragged || this.element === Note.dragged) {
             return
@@ -128,66 +128,17 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
+            console.log(Del.del)
             
         }
 
-        
-    }
+      }
+         
 }
 
-    const Del = {
-        constructor (event) {
-            const del = document.querySelector('.del').addEventListener('click', function (){
-                console.log('click')
-            })
-        // вешаем событие
-            
-        del.addEventListener('dragstart', dragstart())
-        del.addEventListener('dragend', dragend())
-
-        del.addEventListener ('dragenter', dragenter())
-        del.addEventListener ('dragleave', dragleave())
-        del.addEventListener ('dragover', dragover())
-        del.addEventListener ('drop', drop())
 
 
-        function dragstart(event) {
-            console.log('hi')
-        }
-
-        function dragend(event) {
-            console.log('hi')
-        }
-
-        function dragenter (event) {
-            const column = new Column
-            if (column.element === del) {
-                console.log('hi')
-            }
-        }
-
-        function dragleave (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-
-        function dragover (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-
-        function drop (event) {
-            const column = new Column
-            if (column.element) {
-                console.log('hi')
-            }
-        }
-    }
-    }
+    
 
 Note.idCounter = 8
 Note.dragged = null
