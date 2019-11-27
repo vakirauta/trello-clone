@@ -65,6 +65,7 @@ class Column {
         element.addEventListener('dragover', this.dragover.bind(this))
         // columnElement.addEventListener('dragleave', Column.dragleave)
         element.addEventListener('drop', this.drop.bind(this))
+        
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
     }
 
@@ -125,15 +126,6 @@ class Column {
      dragover (event) {
          event.preventDefault()
 
-         let delet = document.querySelector('.del')
-         delet.addEventListener('click', function() {
-         return  console.log(delet)
-         })
-
-         if (Column.dragged  === delet) {
-            console.log('wtf')
-        }
-
          if (Column.dragged === this.element) {
              if (Column.dropped) {
                 Column.dropped.classList.remove('under')
@@ -160,10 +152,6 @@ class Column {
         // Эта проклятая запись попила моей крови,без нее записки не вставятся в пустой столбец
         if (Note.dragged) {
             return this.element.querySelector('[data-notes]').append(Note.dragged)
-        }
-
-        if (delet) {
-            console.log('wtf')
         }
     
         if (this.element.parentElement === Column.dragged.parentElement) {
