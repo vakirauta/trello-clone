@@ -7,8 +7,11 @@ class Note {
         })
         del.addEventListener('drop', function () {
             if(Note.dragged) {
-                del.append(Note.dragged)
-            }
+                
+                confirm('Удалить эелемент') ? alert('удалено'):alert('не удалено')
+              } else {
+                  return
+              }
         })
 
         const element = this.element = document.createElement('div')
