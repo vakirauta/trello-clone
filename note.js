@@ -74,14 +74,6 @@ class Note {
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
-        let delet = document.querySelector('.del')
-        delet.addEventListener('click', function() {
-        return  console.log(delet)
-        })
-
-        if(this.element === delet) {
-            console.log('1')
-        }
         this.element.classList.add('under')
     }
     

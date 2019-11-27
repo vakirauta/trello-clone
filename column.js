@@ -67,6 +67,8 @@ class Column {
         element.addEventListener('drop', this.drop.bind(this))
         
             // обрабатываем новую колонку, чтобы в ней можно было Доавлять новые заметки
+
+            console.log(instance)
     }
 
     add (...notes) {
