@@ -1,6 +1,16 @@
 class Note {
     constructor (id = null, content = '') {
 
+        const del = document.querySelector('.del')
+        del.addEventListener('dragover', function() {
+            event.preventDefault()
+        })
+        del.addEventListener('drop', function () {
+            if(Note.dragged) {
+                del.append(Note.dragged)
+            }
+        })
+
         const element = this.element = document.createElement('div')
 			element.classList.add('note')
             element.setAttribute('draggable', 'true')
@@ -101,9 +111,6 @@ class Note {
     
     drop (event) {
         event.stopPropagation()
-        // if (Note.Del) {
-        //     console.log(Note.Del)
-        // }
 
         if(!Note.dragged || this.element === Note.dragged) {
             return
@@ -128,12 +135,10 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
-            console.log(Del.del)
+            console.log(Del.Del)
             
         }
-
-      }
-         
+    }
 }
 
 

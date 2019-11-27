@@ -22,10 +22,8 @@ Application.load()
                     
                     Application.save()
              }
-        )
-        const del = document.querySelector('.del').addEventListener('click', function (){
-            console.log('click')
-        })      
+        ) 
+
 // редактирование заметок при двойном клике
 // // находим все заметки
 
