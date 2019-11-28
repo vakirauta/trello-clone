@@ -1,20 +1,7 @@
 class Note {
     constructor (id = null, content = '') {
 
-        const del = document.querySelector('.del')
-        del.addEventListener('dragover', function() {
-            event.preventDefault()
-        })
-        del.addEventListener('drop', function () {
-            if(Note.dragged) {
-                
-                confirm('Удалить эелемент') ? alert('удалено'):alert('не удалено')
-              } else {
-                  return
-              }
-        })
-
-        const element = this.element = document.createElement('div')
+            const element = this.element = document.createElement('div')
 			element.classList.add('note')
             element.setAttribute('draggable', 'true')
             element.textContent = content
@@ -45,19 +32,14 @@ class Note {
             Application.save()
         })
 
-        
-    
         element.addEventListener('dragstart', this.dragstart.bind(this))
         element.addEventListener('dragend', this.dragend.bind(this))
         element.addEventListener('dragenter', this.dragenter.bind(this))
         element.addEventListener('dragover', this.dragover.bind(this))
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
-        
 
-            
-
-    }
+        }
 
     get column() {
         return this.element.closest('.column')
@@ -138,15 +120,23 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
-            console.log(Del.Del)
-            
+            console.log(Del)
         }
     }
 }
 
-
-
-    
+const Del = function(element) {
+    this.element = element
+        const del = document.querySelector('.del')
+        del.addEventListener('dragover', function() {
+            event.preventDefault()
+        })
+        del.addEventListener('drop', function () {
+            if(Note.element) {
+                console.log(event.target)
+            }
+        })
+}
 
 Note.idCounter = 8
 Note.dragged = null
