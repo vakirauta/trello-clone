@@ -120,14 +120,14 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
-            console.log(Del)
+            console.log(Del.del)
         }
     }
 }
 
-const Del = function(element) {
-    this.element = element
-        const del = document.querySelector('.del')
+
+let Del = function () {
+        let del = document.querySelector('.del')
         del.addEventListener('dragover', function() {
             event.preventDefault()
         })
@@ -137,6 +137,8 @@ const Del = function(element) {
             }
         })
 }
+
+Del.prototype = new Note
 
 Note.idCounter = 8
 Note.dragged = null
