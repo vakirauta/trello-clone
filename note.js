@@ -1,5 +1,15 @@
 class Note {
     constructor (id = null, content = '') {
+        Note.dragged = this.note
+        const del = document.querySelector('.img1')
+        del.addEventListener('dragover', function() {
+            event.preventDefault()
+        })
+        del.addEventListener('drop', function (event) {
+            if(this.note) {
+                console.log(event)
+            }
+        })
 
             const element = this.element = document.createElement('div')
 			element.classList.add('note')
@@ -38,6 +48,8 @@ class Note {
         element.addEventListener('dragover', this.dragover.bind(this))
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
+
+        
 
         }
 
@@ -120,25 +132,9 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
-            console.log(Del.del)
         }
     }
 }
-
-
-let Del = function () {
-        let del = document.querySelector('.del')
-        del.addEventListener('dragover', function() {
-            event.preventDefault()
-        })
-        del.addEventListener('drop', function () {
-            if(Note.element) {
-                console.log(event.target)
-            }
-        })
-}
-
-Del.prototype = new Note
 
 Note.idCounter = 8
 Note.dragged = null
