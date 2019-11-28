@@ -4,6 +4,16 @@ class Column {
 
        this.notes = []
 
+       const del = document.querySelector('.img1')
+        del.addEventListener('dragover', function() {
+            event.preventDefault()
+        })
+        del.addEventListener('drop', function () {
+            if (Column.dragged) {
+                Column.dragged.remove()
+            }
+        })
+
         const element = this.element = document.createElement('div')
             element.classList.add('column')
             element.setAttribute('draggable', 'true')

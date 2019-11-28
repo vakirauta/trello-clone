@@ -1,13 +1,12 @@
 class Note {
     constructor (id = null, content = '') {
-        Note.dragged = this.note
         const del = document.querySelector('.img1')
         del.addEventListener('dragover', function() {
             event.preventDefault()
         })
-        del.addEventListener('drop', function (event) {
-            if(this.note) {
-                console.log(event)
+        del.addEventListener('drop', function () {
+            if (Note.dragged) {
+                Note.dragged.remove()
             }
         })
 
