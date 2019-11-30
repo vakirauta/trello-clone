@@ -123,11 +123,12 @@ body {
 }
 
 .column.under {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .note.under {
-	opacity: 0.5;
+    opacity: 0.5;
+    border: 1px solid rgb(235, 86, 28);
 }
 
 .del {
