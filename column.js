@@ -57,7 +57,7 @@ class Column {
         })
 
             headerElement.addEventListener('blur', function (event) {
-            headerElement.removeAttribute('contenteditable', true)
+            headerElement.removeAttribute('contenteditable')
             if (!headerElement.textContent) {
                 headerElement.textContent = "В плане"
             }
