@@ -58,15 +58,14 @@ class Note {
 
     dragstart (event) {
         event.stopPropagation()
+
         Note.dragged = this.element
         this.element.classList.add('dragged')
-
-        
-        
     }
     
     dragend (event) {
         event.stopPropagation()
+
         Note.dragged = null
         this.element.classList.remove('dragged')
 
@@ -99,6 +98,7 @@ class Note {
     dragleave (event) {
         
         event.stopPropagation()
+
         if (!Note.dragged || this.element === Note.dragged) {
             return
         }
@@ -131,7 +131,10 @@ class Note {
         else {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
-        }
+          }
+          if (Note.dragged) {
+              console.log('this.element')
+          }
     }
 }
 

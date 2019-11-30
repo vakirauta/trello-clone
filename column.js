@@ -127,12 +127,12 @@ class Column {
     //     //     .forEach(x => x.classList.remove('under'))
     // },
     
-    // dragleave (event) {
-    //     if (!Column.dragged || this.element === Column.dragged) {
-    //         return
-    //     }
-    //     this.element.classList.remove('under')
-    // },
+    dragleave (event) {
+        if (!Column.dragged || this.element === Column.dragged) {
+            return
+        }
+        this.element.classList.remove('under')
+    }
     
      dragover (event) {
          event.preventDefault()
