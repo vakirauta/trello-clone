@@ -1,5 +1,6 @@
 class Note {
     constructor (id = null, content = '') {
+
         const del = document.querySelector('.img1')
         del.addEventListener('dragover', function() {
             event.preventDefault()
@@ -47,9 +48,7 @@ class Note {
         element.addEventListener('dragover', this.dragover.bind(this))
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
-
         
-
         }
 
     get column() {
@@ -132,11 +131,12 @@ class Note {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
           }
-          if (Note.dragged) {
-              console.log('this.element')
-          }
-    }
+          
+      }
+      
 }
+
+        
 
 Note.idCounter = 8
 Note.dragged = null
