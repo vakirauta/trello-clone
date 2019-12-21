@@ -48,7 +48,7 @@ class Note {
         element.addEventListener('dragover', this.dragover.bind(this))
         element.addEventListener('dragleave', this.dragleave.bind(this))
         element.addEventListener('drop', this.drop.bind(this))
-        
+
         }
 
     get column() {
@@ -131,6 +131,10 @@ class Note {
             this.element.parentElement.insertBefore(Note.dragged, this.element)
             console.log('вставляю в соседний столбец')
           }
+
+        //   if (!this.element.parentElement.children.length) {
+        //       console.log(this.element.parentElement.children.length)
+        //   }
           
       }
       
